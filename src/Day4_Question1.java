@@ -1,4 +1,4 @@
-class day4_Question1 {
+class day4_Question1 { // Change class name while copying code
     static int count = 0;
     public static void main(String[] args) {
         // Example test cases
