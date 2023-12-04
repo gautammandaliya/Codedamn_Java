@@ -1,0 +1,43 @@
+Q1.
+Write a method named isLeapYear in the Main class to determine whether a given year is a leap year.
+
+Instructions:
+1. Method Signature:
+--> The method must be public and static.
+--> It should be named isLeapYear.
+--> Accept a single int parameter representing the year.
+--> Return a boolean value - true if the year is a leap year, false otherwise.
+2. Leap Year Calculation:
+--> A year is a leap year if it is divisible by 4.
+--> However, if the year is also divisible by 100, it is not a leap year, unless...
+--> The year is also divisible by 400. In this case, it is a leap year.
+--> Example: The year 2000 is a leap year because it is divisible by 400. However, 1900 is not a leap year because, although divisible by 100, it is not divisible by 400.
+3. Testing Edge Cases:
+--> Your method will be tested with various years to ensure it covers all scenarios, including typical leap years, common non-leap years, and century leap years.
+--> Example 1: isLeapYear(2000) should return true.
+--> Example 2: isLeapYear(1989) should return false.
+
+Edge Cases:
+--> Century Years: These are years like 1900, 2000, and 2100. Remember, only those century years that are divisible by 400 are leap years.
+--> Typical Leap and Non-Leap Years: Years like 2012 (leap year) and 2019 (non-leap year) should be correctly identified based on their divisibility by 4.
+
+By the end of this lab, your method should be able to accurately determine if a given year is a leap year, considering all the mathematical rules and edge cases.
+
+Code:-
+class Main {
+    public static void main(String[] args) {
+        // Test cases
+        System.out.println("2000 is leap year: " + isLeapYear(2000)); // Should return true
+        System.out.println("1989 is leap year: " + isLeapYear(1989)); // Should return false
+        System.out.println("2100 is leap year: " + isLeapYear(2100)); // Should return false
+    }
+
+    // Implement the "isLeapYear" method
+    public static boolean isLeapYear(int year) {
+        if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+            return true; // It is a leap year
+        } else {
+            return false; // It is not a leap year
+        }
+    }
+}
