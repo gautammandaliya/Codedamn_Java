@@ -1,0 +1,102 @@
+Q1.
+In this lab, you will be tasked with implementing a method in Java named isPrimeNumber. This method will determine whether a given number is a prime number.
+
+Objectives
+1. Implement the isPrimeNumber Method:
+--> Your method should be named isPrimeNumber and be part of the Main class.
+--> It should take a single integer input.
+--> The method should return a boolean value: True if the number is prime, and False otherwise.
+
+Key Concepts
+--> Prime Number: A prime number is a natural number greater than 1 that is not a product of two smaller natural numbers.
+-->Edge Cases: Pay special attention to edge cases like 0, 1, and negative numbers. None of these are prime numbers, so your method should return False for these inputs.
+
+Examples
+1. Example with a Prime Number
+--> Input: 5
+--> Expected Output: True
+--> Reason: 5 is a prime number as it has no divisors other than 1 and 5 itself.
+2. Example with a Non-Prime Number
+--> Input: 4
+--> Expected Output: False
+--> Reason: 4 is not a prime number as it can be divided evenly by 2 (apart from 1 and 4).
+
+Instructions
+1. Create the isPrimeNumber Method:
+--> Define the method within the Main class.
+--> Ensure the method accepts a single integer parameter and returns a boolean.
+2. Handle Edge Cases:
+--> Your method should correctly return False for 0, 1, and any negative numbers, as these are not prime.
+3. Testing Your Code:
+--> You can test your method with various inputs, including prime numbers, non-prime numbers, and edge cases.
+
+Challenges Information
+Challenge 1: Method Existence and Correct Return Type
+--> Objective: Ensure that a method named isPrimeNumber exists in the Main class and it returns a boolean value.
+--> Requirement:
+      The method must be named exactly isPrimeNumber.
+      The return type of the method should be boolean (True or False).
+Challenge 2: Test Case for 0
+--> Objective: Verify that the isPrimeNumber method returns False when 0 is passed as an input.
+--> Requirement:
+      Input: 0
+      Expected Output: False
+      Rationale: 0 is not a prime number, so the method should return False.
+Challenge 3: Test Case for 3
+--> Objective: Test that the isPrimeNumber method returns True when 3 is passed as an input.
+--> Requirement:
+      Input: 3
+      Expected Output: True
+      Rationale: 3 is a prime number and should be correctly identified as such.
+Challenge 4: Test Case for 2
+--> Objective: Confirm that the isPrimeNumber method returns True when 2 is passed as an input.
+--> Requirement:
+      Input: 2
+      Expected Output: True
+      Rationale: 2 is the smallest and only even prime number.
+Challenge 5: Test Case for 99
+--> Objective: Ensure that the isPrimeNumber method returns False when 99 is passed as an input.
+--> Requirement:
+      Input: 99
+      Expected Output: False
+      Rationale: 99 is not a prime number as it can be divided by numbers other than 1 and 99.
+Challenge 6: Test Case for Negative Numbers
+--> Objective: Validate that the isPrimeNumber method returns False for any negative number input.
+--> Requirement:
+      Input: Any negative number (e.g., -1, -5, -10)
+      Expected Output: False
+      Rationale: Prime numbers are positive, natural numbers greater than 1. Therefore, all negative numbers should return False.
+This lab will test your understanding of prime numbers, your ability to implement logical conditions in Java, and your attention to detail, especially regarding edge cases. Good luck!
+
+Code:-
+class Main {
+     static int count = 0;
+    public static void main(String[] args) {
+        // Example test cases
+        System.out.println("Is 0 prime? " + isPrimeNumber(0)); // Expected: false
+        System.out.println("Is 3 prime? " + isPrimeNumber(3)); // Expected: true
+        System.out.println("Is 2 prime? " + isPrimeNumber(2)); // Expected: true
+        System.out.println("Is 99 prime? " + isPrimeNumber(99)); // Expected: false
+        System.out.println("Is -5 prime? " + isPrimeNumber(-5)); // Expected: false
+    }
+
+    // Create the "isPrimeNumber" method here. Accepts Integer value as parameter and should return a boolean value
+    public static boolean isPrimeNumber(int number){
+        if(number <= 1){
+            return false;
+        }
+        if(number == 2){
+            return true;
+        }
+        for(int i = 1; i <= number; i++){
+            if(number % i == 0){
+                count++;
+            }
+        }
+        if(count == 2){
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
