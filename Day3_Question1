@@ -1,0 +1,44 @@
+Q1.
+In this lab, you will implement a method in Java named calculateSimpleInterest within the Main class. This method will calculate the simple interest given the principal amount, the rate of interest, and the time period.
+
+Requirements
+--> Method Name: The method must be named calculateSimpleInterest.
+--> Parameters: Three parameters should be passed to this method:
+        --> principal (double): The principal amount.
+        --> rate (double): The rate of interest.
+        --> time (double): The time period.
+--> Return Type: The method should return a double representing the calculated simple interest.
+--> Output Precision: The returned simple interest should be rounded to exactly two decimal places.
+
+Calculation Formula
+The simple interest is calculated using the formula:
+Simple Interest = (principal x rate x time) / 100
+
+Edge Cases and Examples
+--> Edge Case: When any of the parameters (principal, rate, or time) is zero, the returned simple interest should also be zero.
+--> Example 1: If calculateSimpleInterest(2000, 5, 10) is called, the method should return 1000.00. This is because the simple interest for these values is calculated as ((2000 \times 5 \times 10) / 100 = 1000.00).
+--> Example 2: For calculateSimpleInterest(10000, 3, 1), the expected return value is 300.00, calculated as ((10000 \times 3 \times 1) / 100 = 300.00).
+
+Implementation Notes
+--> Ensure that the method handles the edge cases correctly.
+--> Be careful with the data types used, especially for the return value.
+--> The precision of the output is important; it must be exactly two decimal places.
+
+Complete this lab by implementing the calculateSimpleInterest method as per the above specifications. Test cases will verify the accuracy of your implementation, including the method signature, parameter handling, and the precision of the calculated interest.
+
+Code:-
+class Main {
+    public static void main(String[] args) {
+        // Example calls to test the method
+        System.out.printf("%.2f\n", calculateSimpleInterest(2000, 5, 10));  // Expected output: 1000.00
+        System.out.printf("%.2f\n", calculateSimpleInterest(10000, 3, 1));  // Expected output: 300.00
+        System.out.printf("%.2f\n", calculateSimpleInterest(10000, 6, 10)); // Expected output: 6000.00
+        System.out.printf("%.2f\n", calculateSimpleInterest(10000, 0, 10)); // Edge case: Expected output: 0.00
+    }
+   // Define your "calculateSimpleInterest" method here, the method should return a double value and all input parameters should be of type double
+   public static double calculateSimpleInterest(double principal, double rate, double time){
+    double simpleInterest = (principal * rate* time) / 100.0;
+    simpleInterest = Math.round(simpleInterest * 100.0) / 100.0;
+    return simpleInterest;
+   }
+}
