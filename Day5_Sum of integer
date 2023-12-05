@@ -1,0 +1,65 @@
+Q1.
+In this lab, you are tasked with implementing a method named sumOfIntegers in the Main class. This method should calculate the sum of all integers from 1 up to and including a given positive integer n.
+
+Requirements
+--> Create a method named sumOfIntegers in the Main class.
+--> The method should take one integer parameter n.
+--> It should return the sum of all integers from 1 to n.
+--> Consider edge cases, such as when n is 0.
+
+Edge Cases
+--> When n is 0: The method should return 0, as there are no numbers to add.
+--> Positive n: For any positive integer n, the method returns the sum of all integers from 1 to n.
+--> Invalid n: Ensure your method handles unexpected inputs gracefully.
+
+Examples
+--> sumOfIntegers(10): This should return 55, as the sum of numbers from 1 to 10 is 55.
+--> sumOfIntegers(7): For n = 7, the expected output is 28, the sum of 1, 2, 3, 4, 5, 6, and 7.
+--> sumOfIntegers(0): If n is 0, the method should return 0, since there are no numbers to sum up.
+--> Follow these guidelines to implement your method, and test it against the challenges provided to ensure it meets all the requirements.
+
+Challenges Information
+Challenge 1: Validate Method Name and Return Type
+--> Objective: Ensure the method sumOfIntegers is correctly defined in the Main class.
+--> Criteria:
+    The method must be named sumOfIntegers.
+    It should accept a single int parameter.
+    The return type of the method should be int.
+Challenge 2: Correct Value for n = 10
+--> Objective: Test if the sumOfIntegers method returns the correct sum when n is 10.
+--> Criteria:
+    Invoke sumOfIntegers(10).
+    The method should return 55, the sum of integers from 1 to 10.
+Challenge 3: Correct Value for n = 0
+--> Objective: Ensure the sumOfIntegers method correctly handles the case where n is 0.
+--> Criteria:
+    Invoke sumOfIntegers(0).
+    The expected return value should be 0, as the sum from 1 to 0 is 0.
+Challenge 4: Correct Value for n = 7
+--> Objective: Check if the sumOfIntegers method returns the correct sum for n equal to 7.
+--> Criteria:
+    Invoke sumOfIntegers(7).
+    The expected return value should be 28, the sum of integers from 1 to 7.
+Challenge 5: Correct Value for n = 18
+--> Objective: Validate the correctness of the sumOfIntegers method for n equal to 18.
+--> Criteria:
+    Invoke sumOfIntegers(18).
+    The expected return value should be 171, the sum of all integers from 1 to 18.
+
+Code:-
+class Main {
+    public static void main(String[] args) {
+        // Test cases
+        System.out.println("sumOfIntegers(10) = " + sumOfIntegers(10)); // Expected output: 55
+        System.out.println("sumOfIntegers(0) = " + sumOfIntegers(0));   // Expected output: 0
+        System.out.println("sumOfIntegers(7) = " + sumOfIntegers(7));   // Expected output: 28
+        System.out.println("sumOfIntegers(18) = " + sumOfIntegers(18)); // Expected output: 171
+    }
+    public static int sumOfIntegers(int value){
+        int sum = 0;
+        for(int i = 1; i <= value; i++){
+            sum = sum + i;
+        }
+        return sum;
+    }
+}
