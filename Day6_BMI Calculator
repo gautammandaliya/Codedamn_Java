@@ -1,0 +1,94 @@
+Q1.
+In this lab, you are required to create a method named calculateBMI in the Main class. This method should calculate the Body Mass Index (BMI) based on given height (in centimeters) and weight (in kilograms) and return the BMI value along with its category.
+
+Requirements
+--> Method Signature: The method should be named calculateBMI and must be part of the Main class.
+--> Parameters:
+    height (double): The height of the person in centimeters.
+    weight (double): The weight of the person in kilograms.
+--> Return Type: The method should return an Object array containing two elements:
+    The first element is the BMI value (double), rounded to two decimal places.
+    The second element is a String representing the BMI category.
+--> BMI Categories:
+    Below 18.5: "Underweight"
+    18.5 to 24.9: "Healthy"
+    25.0 to 29.9: "Overweight"
+    30.0 and above: "Obesity"
+
+Edge Cases and Examples
+--> The BMI is calculated using the formula: BMI = weight (kg) / (height (m))^2. Note that height should be in meters for this formula.
+--> Ensure the BMI is rounded to two decimal places. For instance, if the calculated BMI is 24.666, it should be rounded to 24.67.
+--> Handle edge cases where the height or weight could be zero or negative. These are invalid inputs, and your method should be designed to handle such cases gracefully.
+
+Example 1:
+--> Input: height = 180 cm, weight = 70 kg
+--> Output: [23.15, "Healthy"] (The calculated BMI is 23.15, which falls in the "Healthy" category.)
+Example 2:
+--> Input: height = 160 cm, weight = 90 kg
+--> Output: [35.16, "Obesity"] (The calculated BMI is 35.16, which falls in the "Obesity" category.)
+Remember to thoroughly test your method to ensure it handles various scenarios correctly.
+
+Challenges Information
+--> Challenge 1: Validate the Correct Method Name and the Method Return Type
+    Objective: Ensure that the method is named calculateBMI and returns an Object array containing the BMI value and its category.
+--> Challenge 2: Test Case for Underweight
+    Objective: Verify that the calculateBMI method accurately calculates and categorizes a BMI as 'Underweight' (BMI < 18.5).
+--> Challenge 3: Test Case for Healthy Weight
+    Objective: Test if the calculateBMI method correctly calculates and categorizes a BMI as 'Healthy' (BMI between 18.5 and 24.9).
+--> Challenge 4: Test Case for Overweight
+    Objective: Ensure that the calculateBMI method properly calculates and categorizes a BMI as 'Overweight' (BMI between 25.0 and 29.9).
+--> Challenge 5: Test Case for Obese
+    Objective: Assess if the calculateBMI method correctly calculates and categorizes a BMI as 'Obesity' (BMI ≥ 30.0).
+
+Code:-
+class Main {
+    public static void main(String[] args) {
+        // Test cases can be added here to validate the method's functionality.
+
+        // Test case 1
+        Object[] result1 = calculateBMI(170, 65); // height in cm, weight in kg
+        System.out.println("BMI: " + result1[0] + ", Category: " + result1[1]);
+
+        // Test case 2
+        Object[] result2 = calculateBMI(180, 77); // height in cm, weight in kg
+        System.out.println("BMI: " + result2[0] + ", Category: " + result2[1]);
+
+        // Test case 3
+        Object[] result3 = calculateBMI(190, 92); // height in cm, weight in kg
+        System.out.println("BMI: " + result3[0] + ", Category: " + result3[1]);
+
+
+    }
+
+    public static Object[] calculateBMI(double height, double weight) {
+        if (height <= 0 || weight <= 0) {
+            // Handle invalid inputs
+            System.out.println("Invalid height or weight.");
+            return null;
+        }
+
+        // Convert height to meters
+        double heightInMeters = height / 100.0;
+
+        // Calculate BMI
+        double bmi = weight / (heightInMeters * heightInMeters);
+
+        // Round BMI to two decimal places
+        bmi = Math.round(bmi * 100.0) / 100.0;
+
+        // Determine BMI category
+        String category;
+        if (bmi < 18.5) {
+            category = "Underweight";
+        } else if (bmi >= 18.5 && bmi <= 24.9) {
+            category = "Healthy";
+        } else if (bmi >= 25.0 && bmi <= 29.9) {
+            category = "Overweight";
+        } else {
+            category = "Obesity";
+        }
+
+        // Create and return the result array
+        return new Object[]{bmi, category};
+    }
+}
