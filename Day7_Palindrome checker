@@ -1,0 +1,42 @@
+Q1.
+In this lab, you will create a method named isPalindrome in the Main class that checks if a given string is a palindrome. A palindrome is a word, phrase, number, or other sequences of characters that reads the same forward and backward (ignoring spaces, punctuation, and capitalization).
+
+Requirements:
+--> Your method should have the following signature: public static boolean isPalindrome(String text).
+--> The method should return true if the input string is a palindrome and false if it is not.
+--> Only consider alphabetic characters; ignore spaces, numbers, punctuation, and capitalization when determining if a string is a palindrome.
+Edge Cases:
+--> An empty string is considered a palindrome.
+--> Strings with only one letter are considered palindromes.
+--> Strings that become palindromes when non-alphabetic characters are removed should return true.
+Examples:
+--> isPalindrome("racecar") should return true as "racecar" is a palindrome.
+--> isPalindrome("A man, a plan, a canal ? Panama") should return true because, when removing all non-alphabetic characters and ignoring case, "amanaplanacanalpanama" is a palindrome.
+Implement the isPalindrome method, considering the above constraints, and pass all the challenges to complete this lab.
+--> Challenges Information
+Challenge 1: Verify Method Signature
+  Ensure that your Main class contains a method named isPalindrome that accepts a single String argument and returns a boolean value. This method should determine if the input string is a palindrome, considering only alphabet characters and ignoring case, spaces, and special characters.
+Challenge 2: Non-Palindrome String Test
+  Implement the isPalindrome method to correctly return false when passed the string 'codedamn'. Remember that the method should return false for any string that is not a palindrome, considering the special character handling as described.
+Challenge 3: Simple Palindrome Test
+  Your isPalindrome method should return true when testing the string 'racecar'. This challenge checks that your method can identify a straightforward palindrome where the string reads the same forwards and backwards.
+Challenge 4: Complex Palindrome with Special Characters and Spaces
+  Enhance the isPalindrome method to return true for the string 'A man, a plan, a canal – Panama'. This test ensures your method handles more complex cases where non-alphabetic characters and spaces must be ignored, and case differences are not considered.
+
+Code:-
+class Main {
+    public static void main(String[] args) {
+        // Test cases to verify the implementation
+        System.out.println(isPalindrome("racecar")); // Should return true
+        System.out.println(isPalindrome("A man, a plan, a canal ? Panama")); // Should return true
+        System.out.println(isPalindrome("codedamn")); // Should return false
+    }
+    
+    public static boolean isPalindrome(String text) {
+        // Remove non-alphabetic characters, convert to lowercase
+        String cleanedText = text.replaceAll("[^a-zA-Z]", "").toLowerCase();
+
+        // Compare the original cleaned string with its reverse
+        return cleanedText.equals(new StringBuilder(cleanedText).reverse().toString());
+    }
+}
