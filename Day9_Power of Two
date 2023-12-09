@@ -1,0 +1,52 @@
+Q1.
+In this lab, you will create a Java method named isPowerOfTwo. This method will check if a given integer is a power of two and return a boolean value as the output.
+
+Objectives
+Write a method public static boolean isPowerOfTwo(int number) in the Main class.
+The method should return true if the provided integer is a power of two, and false otherwise.
+Considerations
+A number is a power of two if it can be written as 2^n where n is an integer.
+Remember to handle edge cases. For example, 1 (2^0) is a power of two, but 0 and negative numbers are not.
+Examples
+isPowerOfTwo(1) should return true as 1 is 2 raised to the power of 0.
+isPowerOfTwo(5) should return false as 5 cannot be expressed as 2 raised to an integer.
+Tips
+Consider the properties of powers of two in binary representation to simplify your logic.
+Don't forget to test your method with different inputs, including edge cases like 0, 1, and negative numbers.
+Challenges
+Challenge 1: Validate the Correct Method Name and the Method Return Type
+Objective: Confirm that you have declared a method named isPowerOfTwo that takes an integer as its parameter and returns a boolean value.
+Hint: Ensure your method is public, named exactly as isPowerOfTwo, and has the signature public static boolean isPowerOfTwo(int number).
+Challenge 2: A Power of Two Returns True
+Objective: Write the isPowerOfTwo method such that it returns true when passed a number that is a power of two.
+Hint: Test your method with inputs like 2, 4, 8, 16, etc., to ensure it correctly identifies these as powers of two.
+Challenge 3: A Different Power of Two Returns True
+Objective: Ensure your method consistently returns true for different powers of two.
+Hint: Validate your method with various powers of two, like 32, 64, or 128, to confirm consistent behavior.
+Challenge 4: A Non-Power of Two Integer Returns False
+Objective: Your method should correctly return false for integers that are not powers of two.
+Hint: Try inputs such as 3, 6, 7, 9, etc., and check if your method accurately returns false.
+By the end of this lab, you should have a robust method that accurately determines whether an integer is a power of two. Happy coding!
+
+Code:-
+class Main {
+    public static void main(String[] args) {
+        // Test cases
+        System.out.println("isPowerOfTwo(1): " + isPowerOfTwo(1)); // Should return true
+        System.out.println("isPowerOfTwo(5): " + isPowerOfTwo(5)); // Should return false
+        System.out.println("isPowerOfTwo(16): " + isPowerOfTwo(16)); // Should return true
+        System.out.println("isPowerOfTwo(-2): " + isPowerOfTwo(-2)); // Should return false
+        System.out.println("isPowerOfTwo(0): " + isPowerOfTwo(0)); // Should return false
+    }
+
+    // Method to check if a given integer is a power of two
+    public static boolean isPowerOfTwo(int number) {
+        // Handling edge cases
+        if (number <= 0) {
+            return false;
+        }
+
+        // Using bitwise AND operation to check if there is only one bit set to 1
+        return (number & (number - 1)) == 0;
+    }
+}
