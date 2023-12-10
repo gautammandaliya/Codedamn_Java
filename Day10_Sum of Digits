@@ -1,0 +1,80 @@
+Q1.
+In this lab, you will develop a Java method named sumOfDigits. This method takes an integer as input and returns a single-digit integer by summing the digits repeatedly until only a single digit remains.
+
+Method Specification
+Method Name: sumOfDigits
+Input: An integer (int).
+Output: A single-digit integer (int).
+Task
+Your task is to implement the sumOfDigits method in the Main class. This method should continuously sum the digits of the input number until the sum is a single digit.
+
+Edge Cases and Examples
+Single-Digit Input: If the input is already a single digit, the method should return the input itself.
+
+Example: For input 5, the output should also be 5.
+Multi-Digit Input: For multi-digit inputs, the method should add up all the digits and, if the result is more than one digit, continue summing the digits of the result until a single digit is obtained.
+
+Example: For input 129, the sum is 1 + 2 + 9 = 12. Since 12 is not a single digit, sum its digits: 1 + 2 = 3. The output should be 3.
+Requirements
+Implement the sumOfDigits method in a class named Main.
+Ensure the method handles both single-digit and multi-digit inputs correctly.
+Pay special attention to edge cases to ensure your method can handle any integer input within the bounds of the int data type.
+This lab challenges your ability to write efficient and accurate Java code, focusing on iterative processing and condition handling. Good luck!
+
+Challenges
+Challenge 1: Validate Method Name and Return Type
+Objective: Verify that the method is correctly named sumOfDigits and returns an int type.
+
+Requirement: The method must be named sumOfDigits.
+Return Type: The method should return an integer (int).
+Details: Confirm the existence of the sumOfDigits method and ensure it is designed to return an int.
+Challenge 2: Test Case for Single Digit Argument
+Objective: Ensure the method correctly handles a single-digit input.
+
+Input: A single-digit integer (e.g., 5).
+Expected Behavior: The method should return the input itself, as the sum of a single-digit number is the number itself.
+Details: Test the method with a single-digit input and expect the output to be identical to the input.
+Challenge 3: Test Case for Double Digit Argument
+Objective: Test the method with a double-digit input.
+
+Input: A double-digit integer (e.g., 34).
+Expected Behavior: The method should sum the digits and continue summing until a single digit is obtained.
+Details: Provide a double-digit number and verify that the method correctly reduces it to a single digit.
+Challenge 4: Test Case for Triple Digit Argument
+Objective: Assess the method's handling of a triple-digit input.
+
+Input: A triple-digit integer (e.g., 129).
+Expected Behavior: The method should sum the digits and continue the process until a single digit is reached.
+Details: Test the method with a triple-digit input and confirm it properly reduces it to a single digit.
+Challenge 5: Test Case for Five Digit Argument
+Objective: Evaluate the method's performance with a five-digit input.
+
+Input: A five-digit integer (e.g., 54321).
+Expected Behavior: The method should sum the digits iteratively until a single-digit sum is obtained.
+Details: Input a five-digit number and check that the method accurately reduces it to a single digit.
+
+Code:-
+class Main {
+    public static void main(String[] args) {
+        // Test cases
+        System.out.println("Sum of digits (5): " + sumOfDigits(5));  // Expected Output: 5
+        System.out.println("Sum of digits (34): " + sumOfDigits(34));  // Expected Output: 7
+        System.out.println("Sum of digits (129): " + sumOfDigits(129)); // Expected Output: 3
+        System.out.println("Sum of digits (54321): " + sumOfDigits(54321)); // Expected Output: 6
+    }
+
+    // Create the sumOfDigits method here
+    public static int sumOfDigits(int number) {
+        // If the input is already a single digit, return the input itself
+        while (number > 9) {
+            int sum = 0;
+            // Sum the digits of the number
+            while (number > 0) {
+                sum += number % 10;
+                number /= 10;
+            }
+            number = sum;
+        }
+        return number;
+    }
+}
