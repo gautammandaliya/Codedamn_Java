@@ -1,0 +1,103 @@
+Q1.
+Implement a method in Java named commonElements that finds the common elements between two integer arrays and returns them in a new array.
+
+Requirements
+The method should be named commonElements.
+It must accept two parameters, both of which are arrays of integers (int[]).
+The return type of the method should be an array of integers (int[]).
+Ensure the method handles various scenarios including edge cases.
+Edge Cases to Consider
+No Common Elements: If there are no common elements between the two arrays, your method should return an empty array.
+Identical Arrays: If both input arrays are identical, the method should return a complete copy of either array.
+Examples
+Example 1
+int[] array1 = {1, 2, 3};
+int[] array2 = {4, 5, 6};
+int[] result = commonElements(array1, array2);
+// result should be an empty array as there are no common elements
+In this example, since there are no common elements between array1 and array2, the method returns an empty array.
+
+Example 2
+int[] array1 = {1, 2, 3, 4};
+int[] array2 = {3, 4, 5, 6};
+int[] result = commonElements(array1, array2);
+// result should be {3, 4}
+Here, the common elements between array1 and array2 are 3 and 4, so the method returns an array containing these two elements.
+
+Challenges Information
+Challenge 1: Validate Method Name and Return Type
+Objective: Ensure the Java method is correctly named commonElements and returns an array of integers.
+Requirements:
+The method must be named exactly commonElements.
+The return type must be an array of integers (int[]).
+The method should accept two parameters, both of which are arrays of integers (int[]).
+Challenge 2: Handling No Matching Elements
+Objective: Test the method's handling of scenarios with no common elements.
+Requirements:
+The method should return an empty array (int[]) when the two input arrays have no common elements.
+Consider edge cases such as empty input arrays or arrays with completely distinct elements.
+Challenge 3: Identical Arrays Scenario
+Objective: Assess the method's functionality when both input arrays are identical.
+Requirements:
+If both input arrays are the same, the method should return a complete copy of either array.
+The output should be identical to the input arrays in content and order.
+Challenge 4: Returning Common Elements
+Objective: Evaluate the method's core functionality to find and return common elements.
+Requirements:
+The method must return an array containing all the common elements between the two input arrays.
+The returned array should not contain any duplicates.
+The order of elements in the returned array is not important.
+
+Code:-
+import java.util.HashSet;
+import java.util.Set;
+
+class Main {
+    public static void main(String[] args) {
+        // Example test cases
+        int[] array1 = {1, 2, 3};
+        int[] array2 = {4, 5, 6};
+        int[] result1 = commonElements(array1, array2);
+        printArray(result1); // Expected: []
+
+        int[] array3 = {1, 2, 3, 4};
+        int[] array4 = {3, 4, 5, 6};
+        int[] result2 = commonElements(array3, array4);
+        printArray(result2); // Expected: [3, 4]
+    }
+
+    public static int[] commonElements(int[] array1, int[] array2) {
+        Set<Integer> set1 = new HashSet<>();
+        for (int num : array1) {
+            set1.add(num);
+        }
+
+        Set<Integer> common = new HashSet<>();
+        for (int num : array2) {
+            if (set1.contains(num)) {
+                common.add(num);
+            }
+        }
+
+        // Convert set to array
+        int[] result = new int[common.size()];
+        int i = 0;
+        for (int num : common) {
+            result[i++] = num;
+        }
+
+        return result;
+    }
+
+    // Utility method to print arrays for testing
+    private static void printArray(int[] array) {
+        System.out.print("[");
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i]);
+            if (i < array.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+    }
+}
