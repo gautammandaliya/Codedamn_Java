@@ -1,0 +1,58 @@
+Q1.
+In this lab, you are tasked with implementing a method named isAnagram in Java. This method will determine whether two given strings are anagrams of each other.
+
+Requirements:
+Method Name: isAnagram
+Class Name: The method should be in a class named Main.
+Parameters: The method takes two string parameters, str1 and str2.
+Return Type: The method should return a boolean value - true if str1 and str2 are anagrams, and false otherwise.
+What is an Anagram?
+Two strings are anagrams if they contain the same characters in any order, ignoring case, spaces, and punctuation.
+
+Edge Cases and Examples:
+Identical Strings: Identical strings are always anagrams of each other. For example, isAnagram("test", "test") should return true.
+
+Different Case Letters: The method should be case-insensitive. For instance, isAnagram("Listen", "Silent") should return true.
+
+Non-Anagrams: If the strings do not contain the same characters, the method should return false. For example, isAnagram("hello", "world") returns false.
+
+Spaces and Punctuation: Spaces and punctuation should not affect the anagram check. For instance, isAnagram("Astronomer", "Moon starer") should also return true.
+
+Instructions:
+Implement the isAnagram method in the Main class. Ensure it handles the various cases and edge conditions effectively. Your implementation will be tested against several scenarios to validate its correctness.
+
+Challenges
+Challenge 1: Identical Strings
+Description: Implement the isAnagram method to return true when both input strings are identical. The method should recognize that any string is an anagram of itself.
+Challenge 2: True Anagrams
+Description: Ensure that your isAnagram method returns true for pairs of strings that are true anagrams of each other. Example: The method should return true for inputs like 'listen' and 'silent'.
+Challenge 3: Non-Anagrams
+Description: Your isAnagram method should return false when the input strings are not anagrams. For instance, it should return false for inputs like 'hello' and 'world'.
+
+
+  Code:-
+  class Main {
+    public static void main(String[] args) {
+        // Example test cases
+        System.out.println(isAnagram("test", "test")); // true
+        System.out.println(isAnagram("Listen", "Silent")); // true
+        System.out.println(isAnagram("hello", "world")); // false
+        System.out.println(isAnagram("Astronomer", "Moon starer")); // true
+    }
+
+    public static boolean isAnagram(String str1, String str2) {
+        // Remove spaces and convert to lowercase for case-insensitive comparison
+        str1 = str1.replaceAll("\\s", "").toLowerCase();
+        str2 = str2.replaceAll("\\s", "").toLowerCase();
+
+        // Check if the sorted characters of both strings are equal
+        return sortString(str1).equals(sortString(str2));
+    }
+
+    private static String sortString(String str) {
+        // Convert the string to char array, sort, and create a new string
+        char[] charArray = str.toCharArray();
+        java.util.Arrays.sort(charArray);
+        return new String(charArray);
+    }
+}
