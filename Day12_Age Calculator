@@ -1,0 +1,72 @@
+Q1.
+In this lab, you will develop a Java method calculateAge within the Main class. This method will calculate the age based on a given date of birth (DOB) and return the age in days, months, and years.
+
+Objective
+Your task is to write a method calculateAge that:
+
+Accepts a single string argument in the format "dd-MM-yyyy", representing the DOB.
+Returns an array (or a similar structure) containing three elements in the order: days, months, years. These values represent the time elapsed since the DOB.
+Edge Cases and Examples
+Edge Cases:
+DOB within the current year: The method should correctly calculate the months and days when the DOB is less than a year ago.
+DOB on the same day and month, different year: When the DOB has the same day and month as today but a different year, the method should accurately calculate the number of years.
+DOB with different day, month, year: The method should correctly calculate the total age when the DOB differs in all aspects (day, month, year) from the current date.
+Examples:
+Example 1: If today is 15-11-2023 and the DOB is 10-06-2023, the method should return [5, 5, 0] - representing 5 days, 5 months, and 0 years.
+Example 2: If today is 15-11-2023 and the DOB is 12-11-1993, the method should return [3, 0, 30] - representing 3 days, 0 months, and 30 years.
+Requirements
+Ensure the method name and return type are as specified.
+The method must handle different time spans and edge cases accurately.
+The returned array should contain integers in the order of days, months, years.
+Testing
+Your implementation will be tested against several scenarios to ensure its accuracy, especially handling the edge cases mentioned. Ensure your method adheres to the described behavior to pass the lab successfully.
+
+Challenges
+Challenge 1: Validate the Correct Method Name and Return Type
+Objective: Ensure that the method in the Main class is named calculateAge and it returns an array of objects (or a similar data structure) containing three elements representing days, months, and years.
+Requirements: The method must accept a single string argument in the format "dd-MM-yyyy" and return an array (or similar structure) with three elements (integers) in the order of days, months, years since the provided date.
+Challenge 2: Test Case for DOB Less Than a Year
+Objective: Ensure that the calculateAge method can accurately calculate age for a date of birth that is less than one year from today.
+Requirements: When provided with a DOB within the past year, the method should return the correct number of days and months, with the year count being zero. This tests the method's accuracy for short time spans.
+Challenge 3: Test Case for a DOB as Same Day, Month as Today with Different Year
+Objective: Test the calculateAge method with a DOB having the same day and month as today but in a different year.
+Requirements: For a DOB on the same day and month as today but a different year, the method should accurately return the age in years, with the days and months being zero. This assesses the method's handling of anniversaries.
+Challenge 4: Test Case with DOB Having Different Day, Month, Year Than Today
+Objective: Evaluate the method with a DOB that is completely different from today's date.
+Requirements: The method should accurately calculate the complete age in days, months, and years for a DOB that differs in day, month, and year from today. This challenge tests the method's overall accuracy and ability to handle typical date differences.
+HINT: You can make use of the methods available in the java.time package to easily parse and find the difference between the dates
+
+Code:-
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+
+class Main {
+    public static void main(String[] args) {
+        // Example usage
+        // The values of the output assume the date 29 November 2023. The values will change based on today's date
+        System.out.println(java.util.Arrays.toString(calculateAge("10-06-2023"))); // Expected Format : [5, 5, 0] 
+        System.out.println(java.util.Arrays.toString(calculateAge("12-11-1993"))); // Expected Format: [3, 0, 30]
+    }
+
+    // complete writing the method
+    public static int[] calculateAge(String dob) {
+        // Parse the input date string to LocalDate
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate birthDate = LocalDate.parse(dob, formatter);
+
+        // Get the current date
+        LocalDate currentDate = LocalDate.now();
+
+        // Calculate the period between the two dates
+        Period period = Period.between(birthDate, currentDate);
+
+        // Extract years, months, and days from the period
+        int years = period.getYears();
+        int months = period.getMonths();
+        int days = period.getDays();
+
+        // expected output format
+        return new int[]{days, months, years};
+    }
+}
