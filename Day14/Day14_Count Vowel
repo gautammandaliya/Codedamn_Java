@@ -1,0 +1,61 @@
+Q1.
+In this lab, you will develop a Java method named calculateVowels within a class named Main. This method should take a single string as an input and return a map (Map<Character, Integer>) containing vowels as keys and their counts as values.
+
+Requirements
+Your method should be named calculateVowels and must be part of the Main class.
+The method takes one parameter: a String.
+It returns a Map<Character, Integer> where each key is a vowel ('a', 'e', 'i', 'o', 'u') and the value is the count of that vowel in the input string.
+Edge Cases
+No Vowels in String: If the input string has no vowels, your method should return a map with all vowels having a count of zero. For example, with input "rhythm", the output should be {a: 0, e: 0, i: 0, o: 0, u: 0}.
+Case Sensitivity: The method should count vowels irrespective of their case (uppercase or lowercase). For example, "Hello World" and "hello world" should yield the same result.
+Examples
+Example 1: For the input "hello world", the expected output is {e: 1, o: 2}.
+Example 2: For the input "Rhythm", the expected output is {a: 0, e: 0, i: 0, o: 0, u: 0}.
+Challenges Information
+Challenge 1: Handling Words with No Vowels
+Objective: Ensure your calculateVowels method can accurately process words without vowels. The method should return a map where all vowel counts are zero.
+Input Example: "rhythm"
+Expected Output: A map with vowels as keys and their counts as zero, e.g., {a: 0, e: 0, i: 0, o: 0, u: 0}.
+Challenge 2: Accurate Vowel Count in Simple Sentences
+Objective: Verify that the calculateVowels method correctly counts each vowel in a simple sentence.
+Input Example: "Hello world"
+Expected Output: An accurate map detailing the count of each vowel present in the sentence. For instance, {e: 1, o: 2} if vowels not present are not included in the output.
+
+Code:-
+import java.util.HashMap;
+import java.util.Map;
+
+class Main {
+    public static void main(String[] args) {
+        // Example test cases
+        System.out.println(calculateVowels("hello world")); // {e=1, o=2}
+        System.out.println(calculateVowels("rhythm")); // {a=0, e=0, i=0, o=0, u=0}
+    }
+
+    public static Map<Character, Integer> calculateVowels(String input) {
+        // Create a map to store vowel counts
+        Map<Character, Integer> vowelCounts = new HashMap<>();
+
+        // Initialize vowel counts to 0
+        vowelCounts.put('a', 0);
+        vowelCounts.put('e', 0);
+        vowelCounts.put('i', 0);
+        vowelCounts.put('o', 0);
+        vowelCounts.put('u', 0);
+
+        // Convert the input string to lowercase for case-insensitive comparison
+        input = input.toLowerCase();
+
+        // Iterate through each character in the input string
+        for (char ch : input.toCharArray()) {
+            // Check if the character is a vowel
+            if ("aeiou".indexOf(ch) != -1) {
+                // Increment the count in the map
+                vowelCounts.put(ch, vowelCounts.get(ch) + 1);
+            }
+        }
+
+        // Return the map with vowel counts
+        return vowelCounts;
+    }
+}
