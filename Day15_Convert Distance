@@ -1,0 +1,53 @@
+Q1.
+In this lab, you will implement two methods in Java to convert distances between miles and kilometers. Your task is to ensure these methods handle calculations accurately, even in edge cases.
+
+Objectives
+Convert Miles to Kilometers: Implement a method named convertToKilometers in the Main class. This method should take a double parameter representing miles and return the equivalent distance in kilometers.
+
+Convert Kilometers to Miles: Implement a method named convertToMiles in the Main class. This method should take a double parameter representing kilometers and return the equivalent distance in miles.
+
+Edge Cases and Precision
+Be mindful of precision in your calculations. Since you are working with double data types, small discrepancies can occur. Your methods should be precise enough to handle edge cases, such as very large or very small values.
+
+Examples
+Example for convertToKilometers:
+Input: 10 miles
+Expected Output: 16.0934 kilometers (since 1 mile = 1.60934 kilometers)
+Example for convertToMiles:
+Input: 16.0934 kilometers
+Expected Output: 10 miles (since 1 kilometer = 0.621371 miles)
+Guidelines
+Your methods must be part of the Main class.
+Ensure your methods return values with a reasonable level of precision.
+Test your methods with various inputs to make sure they work as expected.
+Challenges Information
+Challenge 1: Proper Functionality of convertToKilometers
+Objective: Implement the convertToKilometers method in the Main class to accurately convert a given distance from miles to kilometers. The method should take one parameter of type double (miles) and return a double (kilometers). The conversion should adhere to the standard conversion rate (1 mile = 1.60934 kilometers). Be mindful of the precision in your calculation; the results will be compared with a tolerance for floating-point calculations.
+
+Challenge 2: Proper Functionality of convertToMiles
+Objective: Implement the convertToMiles method in the Main class to accurately convert a given distance from kilometers to miles. The method should take one parameter of type double (kilometers) and return a double (miles). The conversion should follow the standard conversion rate (1 kilometer = 0.621371 miles). Precision is key; your results will be evaluated with a certain tolerance for floating-point arithmetic.
+
+Code:-
+class Main {
+    public static void main(String[] args) {
+        // Example usage
+        double miles = 10;
+        double kilometers = 16.0934;
+
+        double convertedToKilometers = convertToKilometers(miles);
+        double convertedToMiles = convertToMiles(kilometers);
+
+        System.out.println(miles + " miles is " + convertedToKilometers + " kilometers.");
+        System.out.println(kilometers + " kilometers is " + convertedToMiles + " miles.");
+    }
+
+    public static double convertToKilometers(double miles) {
+        // 1 mile = 1.60934 kilometers
+        return miles * 1.60934;
+    }
+
+    public static double convertToMiles(double kilometers) {
+        // 1 kilometer = 0.621371 miles
+        return kilometers * 0.621371;
+    }
+}
