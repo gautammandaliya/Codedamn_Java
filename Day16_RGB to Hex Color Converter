@@ -1,0 +1,62 @@
+Q1.
+In this lab, you'll be writing a Java method named generateHexCode in the Main class. The objective is to convert RGB (Red, Green, Blue) color values into their corresponding hexadecimal color code representations.
+
+Task
+Your task is to implement the public static String generateHexCode(int red, int green, int blue) method. This method should take three integer parameters representing the RGB values (ranging from 0 to 255) and return a string representing the hexadecimal color code. The returned string should start with a # followed by the hexadecimal digits.
+
+Requirements
+Method Signature: The method should be correctly defined as public static String generateHexCode(int red, int green, int blue) in the Main class.
+
+Valid Inputs: The RGB values will be integers in the range of 0 to 255.
+
+Output Format: The output should be a hexadecimal string starting with #.
+
+Edge Cases to Consider
+Minimum Values: When all RGB values are 0, the method should return #000000 (black).
+Maximum Values: When all RGB values are 255, the method should return #FFFFFF (white).
+Examples
+Example 1:
+
+Input: red = 0, green = 0, blue = 0
+Expected Output: #000000
+Explanation: The RGB values represent black, and its hexadecimal code is #000000.
+Example 2:
+
+Input: red = 255, green = 255, blue = 255
+Expected Output: #FFFFFF
+Explanation: The RGB values represent white, and its hexadecimal code is #FFFFFF.
+Make sure your method handles these cases correctly and test it with other RGB combinations to ensure its accuracy.
+
+Challenges Information
+Challenge 1: Generate Hex Code for Black Color
+Objective: Write a method generateHexCode in the Main class. It should return the hexadecimal code for the black color when passed RGB values of 0, 0, 0.
+Method Signature: The method should be public static String generateHexCode(int red, int green, int blue).
+Expected Behavior: When called with generateHexCode(0, 0, 0), the method should return the string #000000.
+Challenge 2: Generate Hex Code for White Color
+Objective: Modify the generateHexCode method in the Main class to return the hexadecimal code for white color when passed RGB values of 255, 255, 255.
+Method Signature: Ensure the method signature remains public static String generateHexCode(int red, int green, int blue).
+Expected Behavior: When called with generateHexCode(255, 255, 255), the method should return the string #FFFFFF.
+Challenge 3: Generate Hex Code for Yellow Color
+Objective: Ensure the generateHexCode method in the Main class can return the hexadecimal code for yellow color when passed RGB values of 255, 255, 0.
+Method Signature: The method signature should be public static String generateHexCode(int red, int green, int blue).
+Expected Behavior: When called with generateHexCode(255, 255, 0), the method should return the string #FFFF00.
+
+Code:-
+class Main {
+    public static void main(String[] args) {
+        // Test cases
+        System.out.println(generateHexCode(0, 0, 0));          // Black
+        System.out.println(generateHexCode(255, 255, 255));    // White
+        System.out.println(generateHexCode(255, 255, 0));      // Yellow
+    }
+
+    public static String generateHexCode(int red, int green, int blue) {
+        // Converting each RGB component to a 2-digit hexadecimal string in uppercase
+        String redHex = String.format("%02X", red);
+        String greenHex = String.format("%02X", green);
+        String blueHex = String.format("%02X", blue);
+
+        // Concatenating the hex strings with a leading '#'
+        return "#" + redHex + greenHex + blueHex;
+    }
+}
