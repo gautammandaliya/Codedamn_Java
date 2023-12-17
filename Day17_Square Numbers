@@ -1,0 +1,117 @@
+Q1.
+Your task is to implement a Java method called squareNumbers that takes an array of integers and returns a new array containing the squares of each number.
+
+Method Signature
+public static int[] squareNumbers(int[] numbers)
+Instructions
+Implement the squareNumbers method in the provided Main class.
+Ensure that your method handles arrays of various lengths and produces accurate results.
+Required Output
+For a given array numbers = [a, b, c, ...], the method should return an array result = [a^2, b^2, c^2, ...].
+
+Examples
+Example 1
+Input:
+
+squareNumbers([3])
+Expected Output:
+
+[9]
+Example 2
+Input:
+
+squareNumbers([1, 2, 3, 4, 5])
+Expected Output:
+
+[1, 4, 9, 16, 25]
+Edge Cases
+Verify that the method works correctly for an array with a single integer.
+
+Example:
+squareNumbers([0])
+Expected Output:
+[0]
+Confirm that the method functions accurately with an array containing 10 integer elements.
+
+Example:
+squareNumbers([10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
+Expected Output:
+[100, 400, 900, 1600, 2500, 3600, 4900, 6400, 8100, 10000]
+Ensure the method produces correct results when given an array with 5 integer elements.
+
+Example:
+squareNumbers([-2, -1, 0, 1, 2])
+Expected Output:
+[4, 1, 0, 1, 4]
+Challenges
+Challenge 1: Single Integer Input
+Description: Verify that the "squareNumbers" method works correctly when provided with an array containing a single integer.
+Test Input: [3]
+Expected Output: [9]
+Challenge 2: Array with 10 Items
+Description: Ensure that the "squareNumbers" method functions accurately with an array containing 10 integer elements.
+Test Input: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Expected Output: [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+Challenge 3: Array with 5 Items
+Description: Confirm that the "squareNumbers" method produces correct results when given an array with 5 integer elements.
+Test Input: [0, -1, 2, -3, 4]
+Expected Output: [0, 1, 4, 9, 16]
+
+Code:-
+class Main {
+    public static void main(String[] args) {
+        // Test cases
+        int[] test1 = {3};
+        int[] result1 = squareNumbers(test1);
+        printResult(test1, result1);
+
+        int[] test2 = {1, 2, 3, 4, 5};
+        int[] result2 = squareNumbers(test2);
+        printResult(test2, result2);
+
+        int[] test3 = {0};
+        int[] result3 = squareNumbers(test3);
+        printResult(test3, result3);
+
+        int[] test4 = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+        int[] result4 = squareNumbers(test4);
+        printResult(test4, result4);
+
+        int[] test5 = {-2, -1, 0, 1, 2};
+        int[] result5 = squareNumbers(test5);
+        printResult(test5, result5);
+    }
+
+    public static void printResult(int[] input, int[] output) {
+        System.out.print("Input: [");
+        for (int i = 0; i < input.length; i++) {
+            System.out.print(input[i]);
+            if (i < input.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.print("]\n");
+
+        System.out.print("Expected Output: [");
+        for (int i = 0; i < output.length; i++) {
+            System.out.print(output[i]);
+            if (i < output.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.print("]\n\n");
+    }
+
+    // Implementation of squareNumbers method
+    public static int[] squareNumbers(int[] numbers) {
+        // Create a new array to store the squared values
+        int[] result = new int[numbers.length];
+
+        // Iterate through the input array and square each number
+        for (int i = 0; i < numbers.length; i++) {
+            result[i] = numbers[i] * numbers[i];
+        }
+
+        return result;
+    }
+}
