@@ -1,0 +1,58 @@
+Question1:-
+In this lab, you will implement a Java method named factorial within the Main class. This method will calculate the factorial of a given positive integer using recursion and return the resulting value.
+
+Objective
+Implement a recursive method to compute the factorial of a number.
+Ensure your method is efficient and handles various inputs correctly.
+Method Signature
+public static int factorial(int n)
+Requirements
+Your method should take a single int parameter, n, and return a int.
+Use recursion to calculate the factorial.
+Handle edge cases, such as when n is 0 (since 0! = 1).
+Examples
+factorial(5) should return 120, as 5! = 5 × 4 × 3 × 2 × 1 = 120.
+factorial(0) should return 1, adhering to the mathematical convention that 0! = 1.
+Edge Cases
+Zero Case: The factorial of 0 is a special case and should return 1.
+Positive Integers: Ensure your method correctly handles and returns the factorial for all positive integer inputs.
+Testing
+Your implementation will be tested for various scenarios, including the factorials of 5, 10, and 12, to ensure accuracy and efficiency.
+
+Challenges
+Challenge 1: Calculate the Factorial of 5
+Objective: Implement a factorial method in the Main class that calculates the factorial of a given number. The method should take an int as an argument and return a long.
+Task: Ensure your method correctly calculates the factorial of 5.
+Expected Output: The method should return 120 when passed the value 5.
+Challenge 2: Calculate the Factorial of 10
+Objective: Your factorial method should handle larger numbers efficiently.
+Task: Test your method's performance by calculating the factorial of 10.
+Expected Output: The method should return 3628800 when passed the value 10.
+Challenge 3: Calculate the Factorial of 12
+Objective: Test the accuracy and performance of your method with an even larger input.
+Task: Calculate the factorial of 12.
+Expected Output: The method should return 479001600 when passed the value 12.
+
+Code:-
+class Main {
+    public static void main(String[] args) {
+        // Challenge 1: Calculate the Factorial of 5
+        System.out.println("Factorial of 5: " + factorial(5));
+
+        // Challenge 2: Calculate the Factorial of 10
+        System.out.println("Factorial of 10: " + factorial(10));
+
+        // Challenge 3: Calculate the Factorial of 12
+        System.out.println("Factorial of 12: " + factorial(12));
+    }
+
+    public static int factorial(int n) {
+        // Handle the base case: 0! = 1
+        if (n == 0) {
+            return 1;
+        }
+        
+        // Use recursion to calculate the factorial
+        return n * factorial(n - 1);
+    }
+}
