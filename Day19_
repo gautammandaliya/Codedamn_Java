@@ -1,0 +1,158 @@
+Your goal is to implement a Java method, convertTemperature, capable of converting temperatures between Celsius, Kelvin, and Fahrenheit. The method should take into account various edge cases and extreme values associated with these temperature scales.
+
+Method Signature
+public class Main {
+    public static double convertTemperature(double inputValue, String currentUnit, String requiredUnit) {
+        // Your implementation here
+    }
+}
+Input
+inputValue: A floating-point number representing the temperature value.
+currentUnit: A string indicating the current temperature unit ("c" for Celsius, "k" for Kelvin, "f" for Fahrenheit).
+requiredUnit: A string indicating the desired temperature unit.
+Output
+The method should return the converted temperature value rounded to two decimal places.
+
+Celsius to Kelvin:
+
+Formula: Kelvin = Celsius + 273.15
+Example: To convert 25°C to Kelvin, calculate 25 + 273.15 = 298.15 K.
+Celsius to Fahrenheit:
+
+Formula: Fahrenheit = (Celsius * 9/5) + 32
+Example: To convert 25°C to Fahrenheit, calculate (25 * 9/5) + 32 = 77 °F.
+Kelvin to Celsius:
+
+Formula: Celsius = Kelvin - 273.15
+Example: To convert 300 K to Celsius, calculate 300 - 273.15 = 26.85 °C.
+Kelvin to Fahrenheit:
+
+Formula: Fahrenheit = (Kelvin - 273.15) * 9/5 + 32
+Example: To convert 300 K to Fahrenheit, calculate (300 - 273.15) * 9/5 + 32 = 80.33 °F.
+Fahrenheit to Kelvin:
+
+Formula: Kelvin = (Fahrenheit - 32) * 5/9 + 273.15
+Example: To convert 77°F to Kelvin, calculate (77 - 32) * 5/9 + 273.15 = 298.15 K.
+Fahrenheit to Celsius:
+
+Formula: Celsius = (Fahrenheit - 32) * 5/9
+Example: To convert 77°F to Celsius, calculate (77 - 32) * 5/9 = 25 °C.
+Each formula in the method is designed to convert temperatures between these three units. The method also rounds the final result to two decimal places for precision and readability.
+
+You can use this method to round the result to two decimal places
+
+Math.round(result * 100.0) / 100.0
+Instructions
+Implement the convertTemperature method in the provided Main class.
+Ensure accurate conversions between Celsius, Kelvin, and Fahrenheit.
+Account for edge cases and extreme values associated with temperature scales.
+Round the returned output to two decimal places.
+Challenges
+Challenge 1: Celsius to Kelvin Conversion
+Implement the convertTemperature method to accurately convert from Celsius to Kelvin.
+
+Test Case:
+Input: convertTemperature(25.0, "c", "k")
+
+Expected Output: Approximately 298.15 (rounded to two decimal places)
+
+Challenge 2: Celsius to Fahrenheit Conversion
+Ensure that the convertTemperature method correctly converts from Celsius to Fahrenheit.
+
+Test Case:
+Input: convertTemperature(30.5, "c", "f")
+
+Expected Output: Approximately 86.90 (rounded to two decimal places)
+
+Challenge 3: Kelvin to Celsius Conversion
+Implement the convertTemperature method to handle conversions from Kelvin to Celsius accurately.
+
+Test Case:
+Input: convertTemperature(300.0, "k", "c")
+
+Expected Output: Approximately 26.85 (rounded to two decimal places)
+
+Challenge 4: Kelvin to Fahrenheit Conversion
+Verify that the convertTemperature method correctly converts from Kelvin to Fahrenheit.
+
+Test Case:
+Input: convertTemperature(500.0, "k", "f")
+
+Expected Output: Approximately 440.33 (rounded to two decimal places)
+
+Challenge 5: Fahrenheit to Kelvin Conversion
+Ensure that the convertTemperature method accurately converts from Fahrenheit to Kelvin.
+
+Test Case:
+Input: convertTemperature(98.6, "f", "k")
+
+Expected Output: Approximately 310.15 (rounded to two decimal places)
+
+Challenge 6: Fahrenheit to Celsius Conversion
+Implement the convertTemperature method to handle conversions from Fahrenheit to Celsius correctly.
+
+Test Case:
+Input: convertTemperature(212.0, "f", "c")
+
+Expected Output: 100.0 (rounded to two decimal places)
+
+Code:-
+public class Main {
+    public static void main(String[] args) {
+        // Example usage:
+        double result1 = convertTemperature(25.0, "c", "k");
+        System.out.println("Celsius to Kelvin: " + result1); // Expected Output: Approximately 298.15
+
+        double result2 = convertTemperature(30.5, "c", "f");
+        System.out.println("Celsius to Fahrenheit: " + result2); // Expected Output: Approximately 86.9
+
+        double result3 = convertTemperature(300.0, "k", "c");
+        System.out.println("Kelvin to Celsius: " + result3); // Expected Output: Approximately 26.85
+
+        double result4 = convertTemperature(500.0, "k", "f");
+        System.out.println("Kelvin to Fahrenheit: " + result4); // Expected Output: Approximately 440.33
+
+        double result5 = convertTemperature(98.6, "f", "k");
+        System.out.println("Fahrenheit to Kelvin: " + result5); // Expected Output: Approximately 310.15
+
+        double result6 = convertTemperature(212.0, "f", "c");
+        System.out.println("Fahrenheit to Celsius: " + result6); // Expected Output: 100.0
+    }
+
+    public static double convertTemperature(double inputValue, String currentUnit, String requiredUnit) {
+        if (currentUnit.equalsIgnoreCase(requiredUnit)) {
+            return inputValue; // No conversion needed
+        }
+
+        double result;
+
+        switch (currentUnit.toLowerCase()) {
+            case "c":
+                if (requiredUnit.equalsIgnoreCase("k")) {
+                    result = inputValue + 273.15; // Celsius to Kelvin
+                } else {
+                    result = (inputValue * 9/5) + 32; // Celsius to Fahrenheit
+                }
+                break;
+            case "k":
+                if (requiredUnit.equalsIgnoreCase("c")) {
+                    result = inputValue - 273.15; // Kelvin to Celsius
+                } else {
+                    result = (inputValue - 273.15) * 9/5 + 32; // Kelvin to Fahrenheit
+                }
+                break;
+            case "f":
+                if (requiredUnit.equalsIgnoreCase("c")) {
+                    result = (inputValue - 32) * 5/9; // Fahrenheit to Celsius
+                } else {
+                    result = (inputValue - 32) * 5/9 + 273.15; // Fahrenheit to Kelvin
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid temperature unit: " + currentUnit);
+        }
+
+        // Round the result to two decimal places
+        return Math.round(result * 100.0) / 100.0;
+    }
+}
