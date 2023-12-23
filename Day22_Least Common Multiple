@@ -1,0 +1,88 @@
+Q1.
+Your task is to implement a method calculateLCM in the Main class that calculates the Least Common Multiple (LCM) of an array of integers.
+
+What is LCM?
+The Least Common Multiple (LCM) of two or more integers is the smallest positive integer that is divisible by each of these integers without leaving a remainder. For example, the LCM of 4 and 5 is 20, as 20 is the smallest number that both 4 and 5 can divide into without a remainder.
+
+Task
+Implement the calculateLCM method that takes an array of integers as input and returns their LCM. This method should be public, static, and reside within the Main class.
+
+Challenges
+You will face three challenges:
+
+Small, Consecutive Integers: Calculate the LCM of an array [1, 2, 3, 4].
+Multiples of 5 and 3: Find the LCM of [15, 20, 25].
+Common Factor Numbers: Determine the LCM for [12, 18].
+Edge Cases to Consider
+Empty Array: Your method should handle an empty array gracefully. You may choose to return a default value or throw an exception in this case.
+Single Element: If the array contains only one element, the LCM is the number itself.
+Negative Numbers: Consider how your method should behave with negative numbers. Typically, LCM is considered for positive integers, but handling negatives gracefully (e.g., by taking absolute values) might be necessary.
+Large Numbers: Ensure your method can handle large integers without running into performance issues or integer overflows.
+Challenges Information
+Challenge 1: Handling Small, Consecutive Integers
+Task: Implement the calculateLCM method to find the LCM of a small set of consecutive integers. This method should be in a class named Main and should be public and static.
+Input: An array containing [1, 2, 3, 4].
+Expected Behavior: Your method should return 12, as the LCM of 1, 2, 3, and 4 is 12.
+Hint: Consider how you can find the LCM of multiple numbers and handle an array as input.
+Challenge 2: Working with Multiples of 5 and 3
+Task: Modify the calculateLCM method in the Main class to correctly calculate the LCM of numbers, particularly focusing on multiples of 5 and 3.
+Input: An array containing [15, 20, 25].
+Expected Behavior: The method should return 300, as the LCM of 15, 20, and 25 is 300.
+Hint: This set of numbers requires careful consideration of common multiples and factors.
+Challenge 3: Dealing with Evenly Spaced Numbers
+Task: Ensure the calculateLCM method in the Main class accurately calculates the LCM of a pair of numbers with a common factor.
+Input: An array containing [12, 18].
+Expected Behavior: The method should return 36, as the LCM of 12 and 18 is 36.
+Hint: Look into how factors of these numbers can help determine their LCM efficiently.
+
+Code:-
+class Main {
+    public static void main(String[] args) {
+        // Test cases
+        int[] array1 = {1, 2, 3, 4};
+        int[] array2 = {15, 20, 25};
+        int[] array3 = {12, 18};
+        int[] emptyArray = {};
+        int[] singleElementArray = {5};
+
+        System.out.println("LCM of [1, 2, 3, 4]: " + calculateLCM(array1));
+        System.out.println("LCM of [15, 20, 25]: " + calculateLCM(array2));
+        System.out.println("LCM of [12, 18]: " + calculateLCM(array3));
+        System.out.println("LCM of []: " + calculateLCM(emptyArray));
+        System.out.println("LCM of [5]: " + calculateLCM(singleElementArray));
+    }
+
+    public static int calculateLCM(int[] array) {
+        // Handle edge case: Empty array
+        if (array.length == 0) {
+            // You can choose to return a default value or throw an exception here
+            // For simplicity, returning 0 in this case
+            return 0;
+        }
+
+        // Initialize result as the first element of the array
+        int result = array[0];
+
+        // Iterate through the array and calculate LCM using GCD
+        for (int i = 1; i < array.length; i++) {
+            result = calculateLCMHelper(result, array[i]);
+        }
+
+        return result;
+    }
+
+    // Helper method to calculate GCD (using Euclid's algorithm)
+    private static int calculateGCD(int a, int b) {
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+
+    // Helper method to calculate LCM using GCD
+    private static int calculateLCMHelper(int a, int b) {
+        return (a * b) / calculateGCD(a, b);
+    }
+}
