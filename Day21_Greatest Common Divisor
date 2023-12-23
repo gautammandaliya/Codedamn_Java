@@ -1,0 +1,62 @@
+Q1.
+In this lab, you will implement the calculatedGCD method in Java to find the Greatest Common Divisor (GCD) of two integers using Euclid's algorithm. The GCD of two integers is the largest positive integer that divides each of the integers without leaving a remainder.
+
+Understanding Euclid's Algorithm
+Euclid's algorithm is a time-tested method to calculate the GCD of two numbers, a and b. The algorithm can be summarized as follows:
+
+If b is 0, then the GCD is a.
+Otherwise, calculate the GCD of b and the remainder of a divided by b.
+This process is repeated until b becomes 0.
+
+Implementing calculatedGCD
+Your task is to implement the calculatedGCD method in the Main class. This method should take two integer parameters and return their GCD calculated using Euclid's algorithm.
+
+public static int calculatedGCD(int a, int b) {
+    // Your implementation goes here
+}
+Edge Cases
+GCD with Zero: One important edge case to consider is when one of the numbers is zero. According to the algorithm, the GCD of 0 and any number n is n itself.
+
+GCD with One: Another edge case is when the GCD is 1. This occurs when the two numbers are co-prime, meaning they have no common divisors other than 1.
+
+Challenges
+You will be tested on the following scenarios:
+
+Finding the GCD of 54 and 24.
+Computing the GCD of 35 and 49.
+Determining the GCD of 1 and 15 (testing co-prime condition).
+Calculating the GCD of 0 and 15 (handling zero input).
+Challenges Information
+Challenge 1: Basic GCD Computation
+Objective: Implement the calculatedGCD method to correctly return the GCD of 54 and 24.
+Expected Behavior: The method should return 6 as the GCD of 54 and 24, demonstrating the basic functionality of Euclid's algorithm.
+Challenge 2: GCD with Prime Factors
+Objective: Write the calculatedGCD method to find the GCD of 35 and 49.
+Expected Behavior: The method should return 7 as the GCD. This challenge tests the algorithm's ability to handle numbers with a common prime factor.
+Challenge 3: Co-prime Numbers GCD
+Objective: Code the calculatedGCD method to compute the GCD of 1 and 15.
+Expected Behavior: The method should return 1, indicating that 1 and 15 are co-prime (their GCD is 1).
+Challenge 4: Handling Zero as an Input
+Objective: Implement the calculatedGCD method that computes the GCD of 0 and 15.
+Expected Behavior: The method should return 15. This challenge checks the algorithm's handling of zero as one of the inputs, where the GCD should be the non-zero number.
+
+Code:-
+class Main {
+    public static void main(String[] args) {
+        // Testing the calculatedGCD method with the provided challenges
+        System.out.println("GCD of 54 and 24: " + calculatedGCD(54, 24)); // Expected output: 6
+        System.out.println("GCD of 35 and 49: " + calculatedGCD(35, 49)); // Expected output: 7
+        System.out.println("GCD of 1 and 15: " + calculatedGCD(1, 15));   // Expected output: 1
+        System.out.println("GCD of 0 and 15: " + calculatedGCD(0, 15));   // Expected output: 15
+    }
+
+    public static int calculatedGCD(int a, int b) {
+        // Handle the case when b is 0
+        if (b == 0) {
+            return a;
+        }
+
+        // Calculate GCD using Euclid's algorithm
+        return calculatedGCD(b, a % b);
+    }
+}
