@@ -1,0 +1,85 @@
+Q1.
+In this lab, you will be implementing the validateCreditCard method in Java. The method should utilize the Luhn algorithm to determine the validity of a given credit card number.
+
+Instructions
+Implement validateCreditCard method:
+
+Open the Main class.
+Implement the validateCreditCard method using the provided signature:
+public static boolean validateCreditCard(String creditCardNumber) {
+    // Your implementation here
+}
+Your method should return true for a valid credit card number.
+Handle invalid credit card numbers:
+
+Extend the validateCreditCard method to handle invalid credit card numbers.
+Update the method to return false when an invalid credit card number is provided.
+Ensure the method still returns true for a valid credit card number.
+Luhn Algorithm
+The Luhn algorithm is a simple checksum formula that is used to validate various identification numbers, including credit card numbers. Here's a brief overview:
+
+Starting from the rightmost digit, double every second digit.
+If doubling results in a two-digit number, add the digits together.
+Sum all the digits in the credit card number.
+If the total sum is a multiple of 10, the credit card number is valid.
+Expected Output
+Challenge 1: Your validateCreditCard method should return true for a valid credit card number.
+Challenge 2: The method should return false for an invalid credit card number.
+Tips
+Pay attention to the Luhn algorithm logic.
+Test your code thoroughly with different credit card numbers.
+Challenges
+Challenge 1: Implement the validateCreditCard method
+
+Implement the validateCreditCard method in the Main class in Java. The method should use the Luhn algorithm to check the validity of a given credit card number. The method should be defined as follows:
+
+Ensure that the method returns true for a valid credit card number.
+
+Challenge 2: Handle invalid credit card numbers
+
+Extend the validateCreditCard method to handle invalid credit card numbers. Update the method to return false when an invalid credit card number is provided. Ensure that the method still returns true for a valid credit card number.
+
+Code:-
+class Main {
+    public static void main(String[] args) {
+        // Test cases
+        System.out.println(validateCreditCard("4532015112830366"));  // Challenge 1: Valid Credit Card
+        System.out.println(validateCreditCard("4532015112830368"));  // Challenge 2: Invalid Credit Card
+    }
+
+    public static boolean validateCreditCard(String creditCardNumber) {
+        // Check if the credit card number is null or empty
+        if (creditCardNumber == null || creditCardNumber.isEmpty()) {
+            return false;
+        }
+
+        // Remove spaces and non-digit characters
+        creditCardNumber = creditCardNumber.replaceAll("[^0-9]", "");
+
+        // Check if the credit card number has a valid length (typically 13 to 19 digits for most cards)
+        if (creditCardNumber.length() < 13 || creditCardNumber.length() > 19) {
+            return false;
+        }
+
+        // Apply the Luhn algorithm
+        int sum = 0;
+        boolean doubleDigit = false;
+
+        for (int i = creditCardNumber.length() - 1; i >= 0; i--) {
+            int digit = Character.getNumericValue(creditCardNumber.charAt(i));
+
+            if (doubleDigit) {
+                digit *= 2;
+
+                if (digit > 9) {
+                    digit = digit % 10 + 1;
+                }
+            }
+
+            sum += digit;
+            doubleDigit = !doubleDigit;
+        }
+
+        return sum % 10 == 0;
+    }
+}
