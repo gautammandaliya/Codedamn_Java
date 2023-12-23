@@ -1,0 +1,88 @@
+Q1.
+In this lab, you will implement a function named verifyBrackets in Java. This function will check if a given string containing various types of brackets (such as {, [, () is balanced. A string is considered balanced when each opening bracket is matched with a closing bracket of the same type, and they are correctly ordered.
+
+Objectives
+Implement the verifyBrackets function.
+Ensure it correctly handles various scenarios as outlined in the challenges.
+Implementation Details
+Function Signature: The function you need to implement is public static boolean verifyBrackets(String input).
+Input: A String containing a sequence of brackets.
+Output: The function should return true if the brackets in the input string are balanced, and false otherwise.
+Concepts to Utilize
+String Manipulation: You'll need to iterate through the characters of the input string.
+Stack Data Structure: A common approach is to use a stack to keep track of the opening brackets. When you encounter a closing bracket, check if it matches the top of the stack.
+Control Flow: Use conditional statements to handle different types of brackets.
+Tips
+Pay attention to edge cases, such as an empty string or strings with non-standard brackets.
+Test your function thoroughly with various inputs to ensure its accuracy.
+Reminder
+Your main goal is to ensure that verifyBrackets accurately assesses whether a given string's brackets are balanced, considering the various scenarios outlined in the challenges.
+
+Challenges Information
+Challenge 1: Balanced Brackets with Mixed Types
+Input: {[()]}
+Expected Output: true
+Description: The function should return true as this string is a well-formed combination of different types of brackets, all correctly opened and closed.
+Challenge 2: Incorrectly Nested Brackets
+Input: {[(])}
+Expected Output: false
+Description: The function should return false because the brackets are not properly nested. In this case, a square bracket is closed before a round bracket that was opened earlier.
+Challenge 3: Empty String
+Input: "" (empty string)
+Expected Output: true
+Description: An empty string should be considered balanced, as it doesn't contain any unmatched brackets. The function should return true for an empty input.
+Challenge 4: Missing Closing Bracket
+Input: {[()]
+Expected Output: false
+Description: The function should return false since the string is missing a closing square bracket. This tests the function's ability to detect incomplete bracket pairs.
+Challenge 5: Extra Closing Bracket
+Input: {[()]}}
+Expected Output: false
+Description: The function should return false because there is an extra closing curly bracket. This challenge checks if the function correctly identifies surplus closing brackets.
+Challenge 6: Including Non-Standard Brackets
+Input: {[(<>)]}
+Expected Output: true
+Description: This string includes a non-standard type of bracket (<>). The function should be flexible enough to handle different types of bracket pairs and return true as they are correctly balanced.
+Challenge 7: Deeply Nested Brackets
+Input: {[({})]}
+Expected Output: true
+Description: The function should return true as the string features deeply nested brackets of various types, all correctly opened and closed.
+
+Code:-
+import java.util.Stack;
+
+class Main {
+    public static void main(String[] args) {
+        // Test cases
+        System.out.println(verifyBrackets("{[()]}"));    // true
+        System.out.println(verifyBrackets("{[(])}"));    // false
+        System.out.println(verifyBrackets(""));          // true
+        System.out.println(verifyBrackets("{[()]"));      // false
+        System.out.println(verifyBrackets("{[()]}}"));    // false
+        System.out.println(verifyBrackets("{[(<>)]}"));   // true
+        System.out.println(verifyBrackets("{[({})]}"));   // true
+    }
+
+    public static boolean verifyBrackets(String input) {
+        Stack<Character> stack = new Stack<>();
+
+        for (char bracket : input.toCharArray()) {
+            if (bracket == '(' || bracket == '[' || bracket == '{' || bracket == '<') {
+                stack.push(bracket);
+            } else if (bracket == ')' || bracket == ']' || bracket == '}' || bracket == '>') {
+                if (stack.isEmpty() || !isValidPair(stack.pop(), bracket)) {
+                    return false;
+                }
+            }
+        }
+
+        return stack.isEmpty();
+    }
+
+    private static boolean isValidPair(char openBracket, char closeBracket) {
+        return (openBracket == '(' && closeBracket == ')') ||
+               (openBracket == '[' && closeBracket == ']') ||
+               (openBracket == '{' && closeBracket == '}') ||
+               (openBracket == '<' && closeBracket == '>');
+    }
+}
