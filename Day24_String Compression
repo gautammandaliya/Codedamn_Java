@@ -1,0 +1,72 @@
+Q1.
+In this lab, you'll be implementing a method in Java that compresses a string by replacing sequences of the same character with that character followed by the count of repeated characters.
+
+Task Overview
+Your primary task is to implement a method named compressString within a class named Main. This method should take a single string as input and return a new string that is a compressed version of the input.
+
+Example
+If the input string is "aaabbc", the compressString method should return "a3b2c1". Here's a quick breakdown of what this means:
+
+'a' appears 3 times consecutively -> replaced by "a3"
+'b' appears 2 times consecutively -> replaced by "b2"
+'c' appears 1 time -> replaced by "c1"
+Thus, the final compressed string is "a3b2c1".
+
+Implementation Guidance
+String Iteration: You will need to iterate over each character in the input string, keeping track of how many times each character is repeated consecutively.
+Handling Different Cases: Ensure that your method can handle various scenarios:
+Strings with no consecutive characters.
+Strings where the entire string is a single repeated character.
+Strings containing special characters and a mix of single and multiple occurrences.
+Output Formation: As you iterate through the string, construct the output by appending the character and its consecutive count to the result.
+Edge Cases: Consider how your method will handle edge cases, such as an empty string.
+Remember, the goal is to create a method that is efficient and accurate in compressing the input string according to the specified rules.
+
+Challenges Information
+Challenge 1: Basic Compression
+Input: "aaabbc" Expected Output: "a3b2c1" Description: The input string contains 'a' repeated three times, 'b' repeated twice, and 'c' once. The method should compress this sequence into "a3b2c1", indicating the count of each consecutive character.
+
+Challenge 2: Single Occurrences
+Input: "abcd" Expected Output: "a1b1c1d1" Description: This string has no consecutive repeated characters. Each character appears once. The expected output is each character followed by the number 1, showing that each character occurs once.
+
+Challenge 3: Single Repeated Character
+Input: "zzzzz" Expected Output: "z5" Description: The input is a single character repeated multiple times (five times, in this case). The method should return the character followed by its count of consecutive appearances, which is "z5" in this case.
+
+Challenge 4: Mixed Characters and Repetitions
+Input: "!@##$$%" Expected Output: "!1@2#2$2%1" Description: This challenge involves special characters and a mix of single and multiple consecutive occurrences. The method should handle different characters and their varying repetition patterns accurately, compressing them into "!1@2#2$2%1".
+
+Code:-
+class Main {
+    public static void main(String[] args) {
+        // Test cases
+        System.out.println(compressString("aaabbc")); // Expected Output: a3b2c1
+        System.out.println(compressString("abcd"));   // Expected Output: a1b1c1d1
+        System.out.println(compressString("zzzzz"));  // Expected Output: z5
+        System.out.println(compressString("!@##$$%")); // Expected Output: !1@2#2$2%1
+    }
+
+    public static String compressString(String input) {
+        if (input == null || input.length() == 0) {
+            return ""; // Handle edge case of an empty string
+        }
+
+        StringBuilder compressed = new StringBuilder();
+        char currentChar = input.charAt(0);
+        int count = 1;
+
+        for (int i = 1; i < input.length(); i++) {
+            if (input.charAt(i) == currentChar) {
+                count++;
+            } else {
+                compressed.append(currentChar).append(count);
+                currentChar = input.charAt(i);
+                count = 1;
+            }
+        }
+
+        // Append the last character and its count
+        compressed.append(currentChar).append(count);
+
+        return compressed.toString();
+    }
+}
