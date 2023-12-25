@@ -1,0 +1,69 @@
+Q1.
+In this lab, you will implement a method in Java named isPythagoreanTriplet. This method will take an array of three numbers as input and return a boolean value indicating whether these numbers form a Pythagorean triplet.
+
+What is a Pythagorean Triplet?
+A Pythagorean triplet consists of three positive integers (a), (b), and (c), such that (a^2 + b^2 = c^2). For example, (3, 4, 5) is a Pythagorean triplet because 3² + 4² = 5².
+
+Task
+Your task is to create a method isPythagoreanTriplet(int[] numbers) in the Main class. This method should:
+
+Take an array of three integers as its parameter.
+Check if these integers can form a Pythagorean triplet.
+Return true if they form a Pythagorean triplet, and false otherwise.
+Implementation Guidelines
+Sorting: Consider sorting the array first. This can simplify the process of comparing the squares of the numbers.
+Math Operations: You'll need to perform squaring and sum operations to check if the numbers satisfy the Pythagorean condition.
+Edge Cases: Be sure to handle edge cases such as negative numbers or zeros, as these do not form valid triplets.
+Remember, no external libraries are required; standard Java functions are sufficient to complete this task.
+
+Goal
+Successfully implement the isPythagoreanTriplet method to pass all the challenges, proving that your method can accurately identify Pythagorean triplets as well as reject non-triplets.
+
+Challenges
+Challenge 1: Test Basic Pythagorean Triplet
+Input: An array [5, 4, 3]
+Expected Behavior: Your function should return true as 5, 4, and 3 form a Pythagorean triplet (5² + 4² = 3²).
+Task: Implement the isPythagoreanTriplet method in the Main class to correctly identify this triplet.
+Challenge 2: Test Larger Pythagorean Triplet
+Input: An array [5, 12, 13]
+Expected Behavior: Your function should return true since 5, 12, and 13 form a valid Pythagorean triplet (5² + 12² = 13²).
+Task: Ensure that your isPythagoreanTriplet method can handle larger integers and still accurately determine a Pythagorean triplet.
+Challenge 3: Test with Non-Triplet
+Input: An array [2, 3, 4]
+Expected Behavior: The function should return false because 2, 3, and 4 do not satisfy the Pythagorean triplet equation (2² + 3² ≠ 4²).
+Task: Modify isPythagoreanTriplet to correctly reject arrays that do not form a Pythagorean triplet.
+Challenge 4: Test Complex Pythagorean Triplet
+Input: An array [7, 25, 24]
+Expected Behavior: Your function should return true, as these numbers form a Pythagorean triplet (7² + 24² = 25²).
+Task: This challenge tests the function's ability to recognize less obvious triplets. Ensure your method can identify such cases accurately.
+Challenge 5: Test Another Non-Triplet
+Input: An array [1, 5, 8]
+Expected Behavior: The function should return false as these numbers do not form a Pythagorean triplet (1² + 5² ≠ 8²).
+Task: Confirm that your isPythagoreanTriplet method can effectively identify and reject invalid triplets.
+
+Code:-
+import java.util.Arrays;
+
+class Main {
+    public static void main(String[] args) {
+        // Testing the method with different inputs
+        System.out.println(isPythagoreanTriplet(new int[]{5, 4, 3})); // Expected Output: True
+        System.out.println(isPythagoreanTriplet(new int[]{5, 12, 13})); // Expected Output: True
+        System.out.println(isPythagoreanTriplet(new int[]{2, 3, 4})); // Expected Output: False
+        System.out.println(isPythagoreanTriplet(new int[]{7, 25, 24})); // Expected Output: True
+        System.out.println(isPythagoreanTriplet(new int[]{1, 5, 8})); // Expected Output: False
+    }
+
+    public static boolean isPythagoreanTriplet(int[] numbers) {
+        // Check if the array has exactly three elements
+        if (numbers == null || numbers.length != 3) {
+            return false;
+        }
+
+        // Sort the array for easier comparison
+        Arrays.sort(numbers);
+
+        // Check if the squares of the two smaller numbers sum up to the square of the largest number
+        return (numbers[0] * numbers[0] + numbers[1] * numbers[1] == numbers[2] * numbers[2]);
+    }
+}
