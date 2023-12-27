@@ -1,0 +1,110 @@
+Q1.
+In this lab, you will be tasked with creating a Java method named validateISBN. This method will take a string as input and determine whether the string is a valid International Standard Book Number (ISBN). Your method should return a boolean value - true if the string is a valid ISBN, and false otherwise.
+
+What is an ISBN?
+An ISBN is a unique identifier for books, designed to be a machine-readable, fixed-length, numerical digit format. There are two types of ISBNs:
+
+ISBN-10: Consists of 10 digits with the possibility of ending with an 'X', which represents the number '10'. The 10-digit ISBN is divided into four parts of variable length, each part separated by a hyphen.
+
+ISBN-13: More common in recent publications, consists of 13 digits and is usually divided into five parts.
+
+Validating an ISBN
+To validate an ISBN, you need to consider the following:
+
+ISBN-10 Validation Rule:
+The sum of 10 times the first digit, 9 times the second digit, 8 times the third digit, and so on down to 1 time the tenth digit must be divisible by 11.
+ISBN-13 Validation Rule:
+The sum of the digits in the odd positions multiplied by 3, plus the sum of the digits in the even positions, must be divisible by 10.
+Examples
+Valid ISBNs:
+ISBN-10: 0-306-40615-2
+ISBN-13: 978-3-16-148410-0
+Invalid ISBNs:
+ISBN-10: 123-456-7890
+ISBN-13: 978-3-16-148410-1
+Your method should be able to process ISBNs with or without hyphens and accurately return the validity status.
+
+Challenges
+You will encounter three main challenges in this lab:
+
+Validate a Valid ISBN with Hyphens: Ensure your method returns true for a correctly formatted and valid ISBN with hyphens.
+Detect an Invalid ISBN with Hyphens: Your method should correctly identify and return false for an ISBN with hyphens that is not valid.
+Validate a Valid ISBN without Hyphens: Test your method's ability to accurately validate an ISBN presented as a continuous string without hyphens.
+Getting Started
+Begin by creating a Main class with a validateISBN method. Implement your logic to validate the ISBNs as per the rules mentioned. Remember, handling both formats of ISBN (10 and 13 digits) correctly is key to successfully completing this lab.
+
+Challenges
+Challenge 1: Valid ISBN with Hyphens
+Objective: Write the validateISBN method to correctly identify a valid ISBN that includes hyphens.
+Input: "978-1-982181-28-4"
+Expected Behavior: The method should return true, indicating that the ISBN is valid.
+Additional Information: Focus on handling a standard 13-digit ISBN format and ensure the method can process hyphens correctly.
+Challenge 2: Invalid ISBN with Hyphens
+Objective: Ensure the validateISBN method can recognize an invalid ISBN, even if formatted with hyphens.
+Input: "778-1-921181-28-4"
+Expected Behavior: The method should return false, as this ISBN is not valid.
+Additional Information: The method should be able to differentiate between valid and invalid ISBNs, regardless of the hyphenation.
+Challenge 3: Valid ISBN without Hyphens
+Objective: Validate an ISBN presented without hyphens.
+Input: "9780593078754"
+Expected Behavior: The method should return true, confirming the validity of the ISBN.
+Additional Information: This tests the method's flexibility in handling ISBNs that are not separated by hyphens.
+
+Code:-
+class Main {
+    public static void main(String[] args) {
+        // Example test cases
+        System.out.println(validateISBN("978-1-982181-28-4")); // true
+        System.out.println(validateISBN("778-1-921181-28-4")); // false
+        System.out.println(validateISBN("9780593078754"));     // true
+    }
+
+    public static boolean validateISBN(String isbn) {
+        // Remove hyphens and convert to upper case for case insensitivity
+        isbn = isbn.replaceAll("-", "").toUpperCase();
+
+        // Check if the ISBN has either 10 or 13 digits
+        if (isbn.length() != 10 && isbn.length() != 13) {
+            return false;
+        }
+
+        // Validate ISBN-10
+        if (isbn.length() == 10) {
+            int sum = 0;
+            for (int i = 0; i < 9; i++) {
+                char digit = isbn.charAt(i);
+                if (!Character.isDigit(digit)) {
+                    return false;
+                }
+                sum += Character.getNumericValue(digit) * (10 - i);
+            }
+
+            char lastChar = isbn.charAt(9);
+            if (lastChar == 'X') {
+                sum += 10;
+            } else if (Character.isDigit(lastChar)) {
+                sum += Character.getNumericValue(lastChar);
+            } else {
+                return false;
+            }
+
+            return sum % 11 == 0;
+        }
+
+        // Validate ISBN-13
+        if (isbn.length() == 13) {
+            int sum = 0;
+            for (int i = 0; i < 12; i++) {
+                char digit = isbn.charAt(i);
+                if (!Character.isDigit(digit)) {
+                    return false;
+                }
+                sum += (i % 2 == 0) ? Character.getNumericValue(digit) : Character.getNumericValue(digit) * 3;
+            }
+
+            return sum % 10 == 0;
+        }
+
+        return false;
+    }
+}
