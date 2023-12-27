@@ -1,0 +1,80 @@
+Q1.
+In this lab, you will implement a method in Java named countSteps, which will calculate the number of steps needed to reach 1 from a given starting number using the Collatz Conjecture. Your implementation will be tested against a series of challenges to ensure accuracy and efficiency.
+
+The Collatz Conjecture
+The Collatz Conjecture is a mathematical algorithm that involves a sequence of operations on positive integers. For any given number n, the sequence is as follows:
+
+If n is even, divide it by 2.
+If n is odd, multiply it by 3 and add 1.
+Continue this process until n becomes 1.
+Task
+Your task is to write a public static method countSteps in a class named Main. This method should:
+
+Take an integer n as an input.
+Return the number of steps it takes to reduce n to 1 by following the rules of the Collatz Conjecture.
+Requirements
+The method should be named countSteps and must be static.
+It should take a single integer parameter and return an integer.
+Ensure your method handles a range of inputs efficiently and accurately.
+Remember, the method should return the number of steps, not print them.
+Example
+If the input to countSteps is 6, the method should return 8, as it takes 8 steps to reduce 6 to 1 following the Collatz Conjecture.
+
+Challenges Information
+Challenge 1: Testing with the Number 7
+Objective: Implement the countSteps method in the Main class to correctly execute the Collatz conjecture starting from the number 7.
+Expected Output: The method should return 16, indicating 16 steps to reduce 7 to 1 following the Collatz conjecture rules.
+Challenge 2: Testing with the Number 6
+Objective: Write the countSteps method in the Main class to process the number 6 according to the Collatz conjecture.
+Expected Output: The method must return 8, denoting 8 steps required to reach 1 from 6.
+Challenge 3: Testing with the Number 16
+Objective: Ensure the countSteps method in the Main class correctly processes the number 16 under the Collatz conjecture.
+Expected Output: The correct output is 4, showing that 4 steps are needed to go from 16 to 1.
+Challenge 4: Testing with the Number 1
+Objective: Test the countSteps method in the Main class with the number 1, the endpoint of the Collatz conjecture.
+Expected Output: As 1 is already the target, the method should return 0, indicating no steps are needed.
+
+Code:-
+class Main {
+
+    public static void main(String[] args) {
+        // Testing the countSteps method with the specified test cases
+        int result;
+
+        // Test with number 7
+        result = countSteps(7);
+        System.out.println("Steps for 7: " + result + " (Expected: 16)");
+
+        // Test with number 6
+        result = countSteps(6);
+        System.out.println("Steps for 6: " + result + " (Expected: 8)");
+
+        // Test with number 16
+        result = countSteps(16);
+        System.out.println("Steps for 16: " + result + " (Expected: 4)");
+
+        // Test with number 1
+        result = countSteps(1);
+        System.out.println("Steps for 1: " + result + " (Expected: 0)");
+    }
+
+    public static int countSteps(int n) {
+        if (n <= 0) {
+            throw new IllegalArgumentException("Input must be a positive integer");
+        }
+
+        int steps = 0;
+        while (n != 1) {
+            if (n % 2 == 0) {
+                // If n is even, divide it by 2
+                n /= 2;
+            } else {
+                // If n is odd, multiply it by 3 and add 1
+                n = 3 * n + 1;
+            }
+            steps++;
+        }
+
+        return steps;
+    }
+}
