@@ -1,0 +1,66 @@
+Q1.
+In this lab, you'll be implementing a method in Java that determines whether a given number is an Armstrong number. This is a great opportunity to apply your Java skills and understand an interesting numerical concept.
+
+What is an Armstrong Number?
+An Armstrong number, also known as a narcissistic number, is a number that is equal to the sum of its own digits each raised to the power of the number of digits. For example, in a 3-digit number ( abc ), the number is an Armstrong number if ( a^3 + b^3 + c^3 = abc ). Similarly, for a 4-digit number ( abcd ), it would be an Armstrong number if ( a^4 + b^4 + c^4 + d^4 = abcd ).
+
+Task
+Your task is to implement a method named isArmstrongNumber in Java. This method will take an integer as input and return a boolean value:
+
+It returns true if the input number is an Armstrong number.
+It returns false otherwise.
+Implementation Suggestions
+Think about how to break down the number into its individual digits.
+Consider how to compute the power of a number with respect to the number of digits.
+Remember to compare the sum of the powered digits to the original number to determine if it's an Armstrong number.
+Note
+Focus on creating a method that is efficient and handles various test cases, especially edge cases like very small or very large numbers. Good luck!
+
+Challenges Information
+Challenge 1: Verify 370
+Description: Implement the isArmstrongNumber method to check if 370 is an Armstrong number.
+Expected Result: The method should return true.
+Challenge 2: Verify 371
+Description: Implement the isArmstrongNumber method to check if 371 is an Armstrong number.
+Expected Result: The method should return true.
+Challenge 3: Verify 0
+Description: Implement the isArmstrongNumber method to check if 0 is an Armstrong number.
+Expected Result: The method should return true.
+Challenge 4: Verify 1
+Description: Implement the isArmstrongNumber method to check if 1 is an Armstrong number.
+Expected Result: The method should return true.
+Challenge 5: Verify 1634
+Description: Implement the isArmstrongNumber method to check if 1634 is an Armstrong number.
+Expected Result: The method should return true.
+Challenge 6: Verify 2
+Description: Implement the isArmstrongNumber method to check if 2 is not an Armstrong number.
+Expected Result: The method should return false.
+Challenge 7: Verify 123
+Description: Implement the isArmstrongNumber method to check if 123 is not an Armstrong number.
+Expected Result: The method should return false.
+
+Code:-
+class Main {
+    public static void main(String[] args) {
+        // Test cases
+        int[] testNumbers = {370, 371, 0, 1, 1634, 2, 123};
+
+        for (int number : testNumbers) {
+            System.out.println("Is " + number + " an Armstrong number? " + isArmstrongNumber(number));
+        }
+    }
+
+    public static boolean isArmstrongNumber(int number) {
+        int originalNumber = number;
+        int numDigits = (int) Math.log10(number) + 1;
+        int sum = 0;
+
+        while (number > 0) {
+            int digit = number % 10;
+            sum += Math.pow(digit, numDigits);
+            number /= 10;
+        }
+
+        return sum == originalNumber;
+    }
+}
