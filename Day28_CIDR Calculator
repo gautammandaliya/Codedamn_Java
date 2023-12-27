@@ -1,0 +1,99 @@
+Q1.
+In this lab, you are tasked with creating a method in Java named calculateIPCount. This method will calculate the number of available IP addresses within a given CIDR block and also identify the last IP address in that block.
+
+Required Output
+Your method should:
+
+Take two parameters: a String representing an IP address and an int representing a CIDR value.
+Return a Map<String, Object> containing two key-value pairs:
+"count": A Long representing the number of available IP addresses in the CIDR block.
+"lastIP": A String representing the last IP address within the CIDR block.
+Understanding CIDR Blocks
+CIDR (Classless Inter-Domain Routing) notation is a method for allocating IP addresses and routing Internet Protocol packets. It's represented as a suffix /n following an IP address, where n is the number of bits used for the network portion of the address.
+
+Examples
+CIDR Block: 192.168.1.0/24
+
+This implies the first 24 bits are the network part of the address, leaving the last 8 bits for host addresses.
+Available IP Addresses: 2^(32-24) = 256
+Last IP Address: 192.168.1.255
+CIDR Block: 10.0.0.0/16
+
+Here, the first 16 bits are the network part, leaving 16 bits for host addresses.
+Available IP Addresses: 2^(32-16) = 65,536
+Last IP Address: 10.0.255.255
+Implementation Abstract
+To implement the calculateIPCount method, consider the following steps without delving into actual code:
+
+Parse the CIDR Value: Understand how to parse the CIDR value to determine the number of bits allocated for the host part of the IP address.
+Calculate IP Range: Use the parsed CIDR value to calculate the total number of available IP addresses in the block.
+Determine Last IP Address: Develop a mechanism to calculate the last IP address in the CIDR block based on the provided IP address and CIDR value.
+Return Results: Ensure your method returns a map with the calculated count and the last IP address.
+Remember, the key to success in this lab is understanding the relationship between the IP address, the CIDR notation, and how they translate into a range of IP addresses.
+
+Challenges Information
+Challenge 1
+Objective: Implement the calculateIPCount method to calculate the number of available IP addresses and the last IP address in the CIDR block for the given IP address "74.125.227.0" and CIDR value "26".
+
+Expected Output:
+Count of Available IP Addresses: 64
+Last IP Address in the CIDR Block: "74.125.227.63"
+Challenge 2
+Objective: The method should correctly handle the IP address "74.125.227.0" with a CIDR value of "29".
+
+Expected Output:
+Count of Available IP Addresses: 8
+Last IP Address in the CIDR Block: "74.125.227.7"
+Challenge 3
+Objective: Test the method's capability with a larger CIDR block, using the IP address "74.125.227.0" and a CIDR value of "13".
+
+Expected Output:
+Count of Available IP Addresses: 524288
+Last IP Address in the CIDR Block: "74.127.255.255"
+
+Code:-
+import java.util.HashMap;
+import java.util.Map;
+
+class Main {
+    public static void main(String[] args) {
+        // Test cases
+        System.out.println(calculateIPCount("74.125.227.0", 26)); // Expected Output: {lastIP=74.125.227.63, count=64}
+        System.out.println(calculateIPCount("74.125.227.0", 29)); // Expected Output: {lastIP=74.125.227.7, count=8}
+        System.out.println(calculateIPCount("74.125.227.0", 13)); // Expected Output: {lastIP=74.127.255.255, count=524288}
+    }
+
+    public static Map<String, Object> calculateIPCount(String ipAddress, int cidr) {
+        Map<String, Object> result = new HashMap<>();
+
+        // Parse IP address
+        String[] ipParts = ipAddress.split("\\.");
+        int[] ipIntParts = new int[4];
+        for (int i = 0; i < 4; i++) {
+            ipIntParts[i] = Integer.parseInt(ipParts[i]);
+        }
+
+        // Calculate count of available IP addresses
+        long count = (long) Math.pow(2, 32 - cidr);
+
+        // Calculate last IP address
+        int lastIPPart = (int) (ipIntParts[3] + count - 1);
+
+        // Ensure lastIPPart does not exceed 255
+        lastIPPart = Math.min(lastIPPart, 255);
+
+        int[] lastIPParts = {
+                ipIntParts[0],
+                ipIntParts[1],
+                ipIntParts[2],
+                lastIPPart
+        };
+        String lastIP = String.format("%d.%d.%d.%d", lastIPParts[0], lastIPParts[1], lastIPParts[2], lastIPParts[3]);
+
+        // Populate the result map
+        result.put("count", count);
+        result.put("lastIP", lastIP);
+
+        return result;
+    }
+}
