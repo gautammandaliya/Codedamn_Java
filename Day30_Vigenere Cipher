@@ -1,0 +1,73 @@
+Q1.
+In this lab, you will implement a Java method vigenereCipher capable of encoding and decoding text using the Vigenère cipher. This method should handle both encoding and decoding actions based on the provided arguments.
+
+Expected Output
+The method vigenereCipher must take two arguments: a String to be encoded or decoded, and an Action string which can be either "encode" or "decode".
+For encoding, transform the given text into a ciphered form using the Vigenère cipher technique with the key "codedamn".
+For decoding, revert the ciphered text back to its original form using the same key.
+Spaces, comma and full stop (.) in the text should be retained and should not affect the encoding or decoding process.
+Ensure that capital letters in the input are decoded to capital letters in the output.
+Understanding the Vigenère Cipher
+The Vigenère cipher is a method of encrypting alphabetic text by using a simple form of polyalphabetic substitution. It employs a keyword, where each letter of the keyword refers to a shift in the alphabet.
+
+Example
+Keyword: CODEDAMN (repeated to match the length of the text)
+Text to Encode: HELLO WORLD
+Encoded Text: JFNNO YOSND
+In this example, each letter in HELLO WORLD is shifted by the corresponding letter in the extended keyword. H (shifted by C) becomes J, E (shifted by O) becomes F, and so on.
+
+Edge Case Consideration
+It is crucial that capital letters in the input text remain capital in the output. For example, Hello World should not be decoded into hello world but rather with the same capitalization like HeLlo WoRld (assuming that's the correct decoded text according to the key).
+Your Task
+Implement the vigenereCipher method in a class named Main.
+Make sure the method adheres to the specifications regarding input arguments, encoding, decoding, space handling, and capitalization consistency.
+Challenges Information
+Challenge 1: Decoding a Ciphered Message
+Input: String: uddgh, ttr hwqeo fdbphliu, Action: decode Expected Output: The method should return the string space, the final frontier. Objective: Test the method's ability to decode a message encoded using the Vigenère cipher with the key codedamn.
+
+Challenge 2: Encoding a Given Phrase
+Input: String: May the Force be with you., Action: encode Expected Output: The method should return Oob xke Rbtqh fh wugj mry. Objective: Assess the method's capability to encode a plain text phrase into a ciphered message using the Vigenère technique with the key codedamn.
+
+Challenge 3: Decoding a Complex Sentence
+Input: String: Vvh qrsf rphhvwauakbj sxtobos lw whq zqgw plkqya, Action: decode Expected Output: The method should return The most entertaining outcome is the most likely. Objective: Test the decoding function on a more complex sentence, evaluating the method's robustness in handling longer and intricate ciphered texts with the key codedamn.
+
+You can learn more about Vigenere Cipher on this page
+
+Code:-
+class Main {
+
+    public static void main(String[] args) {
+        // Test cases
+        System.out.println(vigenereCipher("uddgh, ttr hwqeo fdbphliu", "decode")); // Expected Output: space, the final frontier
+        System.out.println(vigenereCipher("May the Force be with you.", "encode")); // Expected Output: Oob xke Rbtqh fh wugj mry.
+        System.out.println(vigenereCipher("Vvh qrsf rphhvwauakbj sxtobos lw whq zqgw plkqya", "decode")); // Expected Output: The most entertaining outcome is the most likely
+    }
+
+    public static String vigenereCipher(String text, String action) {
+        String key = "codedamn";
+        StringBuilder result = new StringBuilder();
+
+        int keyIndex = 0;
+        for (char c : text.toCharArray()) {
+            if (Character.isLetter(c)) {
+                boolean isUpperCase = Character.isUpperCase(c);
+                char base = isUpperCase ? 'A' : 'a';
+                char shiftedChar;
+
+                if (action.equals("encode")) {
+                    shiftedChar = (char) ((c + key.charAt(keyIndex) - 2 * base) % 26 + base);
+                } else {
+                    shiftedChar = (char) ((c - key.charAt(keyIndex) + 26) % 26 + base);
+                }
+
+                result.append(isUpperCase ? shiftedChar : Character.toLowerCase(shiftedChar));
+
+                keyIndex = (keyIndex + 1) % key.length();
+            } else {
+                result.append(c);
+            }
+        }
+
+        return result.toString();
+    }
+}
