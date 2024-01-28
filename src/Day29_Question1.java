@@ -1,57 +1,64 @@
-class Day29_Question1 { //change classname while copying code
+public class Day29_Question1 {
     public static void main(String[] args) {
-        // Example test cases
-        System.out.println(validateISBN("978-1-982181-28-4")); // true
-        System.out.println(validateISBN("778-1-921181-28-4")); // false
-        System.out.println(validateISBN("9780593078754"));     // true
+        // Test cases
+        System.out.println(validateISBN("978-1-982181-28-4")); // Expected Output: true
+        System.out.println(validateISBN("778-1-921181-28-4"));  // Expected Output: false
+        System.out.println(validateISBN("9780593078754"));      // Expected Output: true
     }
 
     public static boolean validateISBN(String isbn) {
-        // Remove hyphens and convert to upper case for case insensitivity
+        // Remove hyphens and convert to uppercase for uniformity
         isbn = isbn.replaceAll("-", "").toUpperCase();
 
-        // Check if the ISBN has either 10 or 13 digits
+        // Check if the ISBN is of valid length (either 10 or 13 digits)
         if (isbn.length() != 10 && isbn.length() != 13) {
             return false;
         }
 
-        // Validate ISBN-10
         if (isbn.length() == 10) {
-            int sum = 0;
-            for (int i = 0; i < 9; i++) {
-                char digit = isbn.charAt(i);
-                if (!Character.isDigit(digit)) {
-                    return false;
-                }
-                sum += Character.getNumericValue(digit) * (10 - i);
-            }
+            return validateISBN10(isbn);
+        } else {
+            return validateISBN13(isbn);
+        }
+    }
 
-            char lastChar = isbn.charAt(9);
-            if (lastChar == 'X') {
-                sum += 10;
-            } else if (Character.isDigit(lastChar)) {
-                sum += Character.getNumericValue(lastChar);
-            } else {
+    private static boolean validateISBN10(String isbn) {
+        int sum = 0;
+        for (int i = 0; i < 9; i++) {
+            char digit = isbn.charAt(i);
+            if (!Character.isDigit(digit)) {
                 return false;
             }
-
-            return sum % 11 == 0;
+            sum += (10 - i) * Character.getNumericValue(digit);
         }
 
-        // Validate ISBN-13
-        if (isbn.length() == 13) {
-            int sum = 0;
-            for (int i = 0; i < 12; i++) {
-                char digit = isbn.charAt(i);
-                if (!Character.isDigit(digit)) {
-                    return false;
-                }
-                sum += (i % 2 == 0) ? Character.getNumericValue(digit) : Character.getNumericValue(digit) * 3;
+        char lastDigit = isbn.charAt(9);
+        if (lastDigit == 'X') {
+            sum += 10;
+        } else if (Character.isDigit(lastDigit)) {
+            sum += Character.getNumericValue(lastDigit);
+        } else {
+            return false;
+        }
+
+        return sum % 11 == 0;
+    }
+
+    private static boolean validateISBN13(String isbn) {
+        int sum = 0;
+        for (int i = 0; i < 12; i++) {
+            char digit = isbn.charAt(i);
+            if (!Character.isDigit(digit)) {
+                return false;
             }
-
-            return sum % 10 == 0;
+            sum += (i % 2 == 0) ? Character.getNumericValue(digit) : 3 * Character.getNumericValue(digit);
         }
 
-        return false;
+        char lastDigit = isbn.charAt(12);
+        if (!Character.isDigit(lastDigit)) {
+            return false;
+        }
+
+        return (sum + Character.getNumericValue(lastDigit)) % 10 == 0;
     }
 }
