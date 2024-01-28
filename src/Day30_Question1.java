@@ -1,9 +1,9 @@
-public class Day30_Question1 { //change classname while copying code
+public class Day30_Question1 {
     public static void main(String[] args) {
         // Test cases
-        System.out.println(vigenereCipher("uddgh, ttr hwqeo fdbphliu", "decode")); // Expected Output: space, the final frontier
-        System.out.println(vigenereCipher("May the Force be with you.", "encode")); // Expected Output: Oob xke Rbtqh fh wugj mry.
-        System.out.println(vigenereCipher("Vvh qrsf rphhvwauakbj sxtobos lw whq zqgw plkqya", "decode")); // Expected Output: The most entertaining outcome is the most likely
+        System.out.println(vigenereCipher("uddgh, ttr hwqeo fdbphliu", "decode")); // Challenge 1
+        System.out.println(vigenereCipher("May the Force be with you.", "encode")); // Challenge 2
+        System.out.println(vigenereCipher("Vvh qrsf rphhvwauakbj sxtobos lw whq zqgw plkqya", "decode")); // Challenge 3
     }
 
     public static String vigenereCipher(String text, String action) {
@@ -11,24 +11,23 @@ public class Day30_Question1 { //change classname while copying code
         StringBuilder result = new StringBuilder();
 
         int keyIndex = 0;
-        for (char c : text.toCharArray()) {
-            if (Character.isLetter(c)) {
-                boolean isUpperCase = Character.isUpperCase(c);
-                char base = isUpperCase ? 'A' : 'a';
-                char shiftedChar;
+        for (int i = 0; i < text.length(); i++) {
+            char currentChar = text.charAt(i);
+
+            if (Character.isLetter(currentChar)) {
+                char base = Character.isUpperCase(currentChar) ? 'A' : 'a';
+                int shift = (Character.toUpperCase(key.charAt(keyIndex)) - 'A' + 26) % 26;
 
                 if (action.equals("encode")) {
-                    shiftedChar = (char) ((c + key.charAt(keyIndex) - 2 * base) % 26 + base);
-                } else {
-                    shiftedChar = (char) ((c - key.charAt(keyIndex) + 26) % 26 + base);
+                    currentChar = (char) (base + (currentChar - base + shift) % 26);
+                } else if (action.equals("decode")) {
+                    currentChar = (char) (base + (currentChar - base - shift + 26) % 26);
                 }
 
-                result.append(isUpperCase ? shiftedChar : Character.toLowerCase(shiftedChar));
-
                 keyIndex = (keyIndex + 1) % key.length();
-            } else {
-                result.append(c);
             }
+
+            result.append(currentChar);
         }
 
         return result.toString();
