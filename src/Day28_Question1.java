@@ -1,5 +1,4 @@
-
-    import java.util.HashMap;
+import java.util.HashMap;
 import java.util.Map;
 
     public class Day28_Question1 {//change classname while copying code
@@ -43,6 +42,5 @@ import java.util.Map;
 
             return result;
         }
-    }
 
 }
